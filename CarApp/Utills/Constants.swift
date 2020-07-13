@@ -11,4 +11,10 @@ import Foundation
 class Constants{
     static let FIRE_STORE_DB_PATH = "users"
     static let homeViewController = "homeVC"
+    static let loginRegisterViewController = "loginRegVC"
+    
+}
+
+class dictConstants {
+    
 }

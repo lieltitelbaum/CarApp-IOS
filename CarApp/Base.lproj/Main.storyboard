@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n1Y-o7-fXy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HjP-gj-UdR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginRegVC" id="BYZ-38-t0r" customClass="ViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1957.9710144927537" y="99.776785714285708"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="MbT-ci-qCf">
@@ -64,7 +64,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="E8E-he-wLb">
-                                <rect key="frame" x="40" y="84" width="334" height="190.5"/>
+                                <rect key="frame" x="40" y="128" width="334" height="190.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uzq-6e-4by">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -119,7 +119,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZM-xp-S97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584" y="840"/>
+            <point key="canvasLocation" x="2375" y="840"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="dXJ-cY-cbE">
+            <objects>
+                <viewController id="rH7-yt-RJB" customClass="ScannerViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pa7-7w-Cmb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="42W-aD-y81"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QD2-XD-hAq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bsn-Xs-9GM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5244.9275362318849" y="-260.49107142857144"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="og6-hq-6LF">
@@ -130,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dMa-62-pHO">
-                                <rect key="frame" x="40" y="84" width="334" height="430.5"/>
+                                <rect key="frame" x="40" y="128" width="334" height="430.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpM-LL-h70">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -228,38 +244,174 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjT-m4-vUq">
-                                <rect key="frame" x="186" y="301" width="88" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-lw-5AE" userLabel="Scan Stack View">
+                                <rect key="frame" x="40" y="128" width="334" height="271"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Liel Titelbaum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oen-sz-eYy">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="91"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5by-9g-4ea">
+                                        <rect key="frame" x="0.0" y="141" width="334" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="l7L-FI-LG6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Scan Barcode"/>
+                                        <connections>
+                                            <action selector="scanbarcodeClicked:" destination="kTD-Zd-Niq" eventType="touchUpInside" id="KBC-Ye-iQZ"/>
+                                            <segue destination="rH7-yt-RJB" kind="show" id="OHN-S3-fxf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgF-gF-3QJ">
+                                        <rect key="frame" x="0.0" y="241" width="334" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Emergency Services"/>
+                                        <connections>
+                                            <action selector="emergencyClicked:" destination="kTD-Zd-Niq" eventType="touchUpInside" id="2tY-tt-yjT"/>
+                                            <segue destination="44c-dQ-jlc" kind="show" id="e50-yn-yGD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qgF-gF-3QJ" firstAttribute="height" secondItem="5by-9g-4ea" secondAttribute="height" multiplier="0.6" id="hLT-ys-h63"/>
+                                </constraints>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmf-CN-iE9">
+                                <rect key="frame" x="40" y="499" width="334" height="323"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6xa-9i-L2R" firstAttribute="trailing" secondItem="q3h-lw-5AE" secondAttribute="trailing" constant="40" id="1ah-pe-iHl"/>
+                            <constraint firstItem="6xa-9i-L2R" firstAttribute="bottom" secondItem="xmf-CN-iE9" secondAttribute="bottom" constant="40" id="ALj-wi-qkv"/>
+                            <constraint firstItem="6xa-9i-L2R" firstAttribute="trailing" secondItem="xmf-CN-iE9" secondAttribute="trailing" constant="40" id="IcI-7n-m5g"/>
+                            <constraint firstItem="xmf-CN-iE9" firstAttribute="leading" secondItem="6xa-9i-L2R" secondAttribute="leading" constant="40" id="Jfu-2b-gRs"/>
+                            <constraint firstItem="q3h-lw-5AE" firstAttribute="top" secondItem="6xa-9i-L2R" secondAttribute="top" constant="40" id="Tvd-6o-G62"/>
+                            <constraint firstItem="xmf-CN-iE9" firstAttribute="top" secondItem="q3h-lw-5AE" secondAttribute="bottom" constant="100" id="eGx-NW-mtq"/>
+                            <constraint firstItem="q3h-lw-5AE" firstAttribute="leading" secondItem="6xa-9i-L2R" secondAttribute="leading" constant="40" id="yax-1c-jaL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6xa-9i-L2R"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8m7-xY-MsV"/>
+                    <connections>
+                        <outlet property="emergencyBtn" destination="qgF-gF-3QJ" id="idU-7Y-E1P"/>
+                        <outlet property="qrCodeImage" destination="xmf-CN-iE9" id="5tn-2c-HP7"/>
+                        <outlet property="scanBarcodeBtn" destination="5by-9g-4ea" id="KBS-VN-Pi0"/>
+                        <outlet property="welcomeLabel" destination="oen-sz-eYy" id="CMp-Sl-9ct"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDZ-kw-3mO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1780" y="100"/>
+            <point key="canvasLocation" x="4402.898550724638" y="92.410714285714278"/>
+        </scene>
+        <!--Emergency Services-->
+        <scene sceneID="Hg9-Jy-79Q">
+            <objects>
+                <viewController id="44c-dQ-jlc" customClass="EmergencyServicesViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8qg-F5-hJn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-pn-EdG">
+                                <rect key="frame" x="40" y="238" width="334" height="190"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJq-SC-LgY">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ti7-sK-kEq"/>
+                                        </constraints>
+                                        <state key="normal" title="Call Police">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="callPoliceTapped:" destination="44c-dQ-jlc" eventType="touchUpInside" id="qA4-6z-5Gg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bo6-5A-hCk">
+                                        <rect key="frame" x="0.0" y="90" width="334" height="30"/>
+                                        <state key="normal" title="Call MADA">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="callMadaTapped:" destination="44c-dQ-jlc" eventType="touchUpInside" id="I2k-FV-OaG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xf6-X1-eFc">
+                                        <rect key="frame" x="0.0" y="160" width="334" height="30"/>
+                                        <state key="normal" title="Call Fire and Rescue Services">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="callFireTapped:" destination="44c-dQ-jlc" eventType="touchUpInside" id="uSq-vH-23z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Xf6-X1-eFc" firstAttribute="height" secondItem="AJq-SC-LgY" secondAttribute="height" multiplier="0.6" id="Eup-S0-ovr"/>
+                                    <constraint firstItem="bo6-5A-hCk" firstAttribute="height" secondItem="AJq-SC-LgY" secondAttribute="height" multiplier="0.6" id="FZg-CV-k4o"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4oN-pn-EdG" firstAttribute="top" secondItem="DVL-Kt-HgQ" secondAttribute="top" constant="150" id="AIj-U8-qRp"/>
+                            <constraint firstItem="4oN-pn-EdG" firstAttribute="leading" secondItem="DVL-Kt-HgQ" secondAttribute="leading" constant="40" id="mjj-fl-Hjg"/>
+                            <constraint firstItem="DVL-Kt-HgQ" firstAttribute="trailing" secondItem="4oN-pn-EdG" secondAttribute="trailing" constant="40" id="qPj-GC-tGy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DVL-Kt-HgQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Emergency Services" id="Cg2-b2-DSv"/>
+                    <connections>
+                        <outlet property="callFireBtn" destination="Xf6-X1-eFc" id="EhE-i0-NB1"/>
+                        <outlet property="callMadaBtn" destination="bo6-5A-hCk" id="1nQ-fb-8Ra"/>
+                        <outlet property="callPoliceBtn" destination="AJq-SC-LgY" id="YMe-fD-7x7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SYg-ie-naW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5244.9275362318849" y="459.375"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="dAU-zI-68o">
+        <scene sceneID="FDz-ZB-gaC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="n1Y-o7-fXy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HjP-gj-UdR" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PTb-Ma-sx2">
+                    <navigationItem key="navigationItem" id="QFG-IR-Cng"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bdx-2j-Hp7">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="E2S-ru-h0D"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="VGO-cL-9KV"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Y1-Cr-vqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cIB-Rd-Rz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1047.8260869565217" y="99.776785714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gys-2i-thY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HMI-ZE-lgh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bez-8M-NZV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9e3-69-KCT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kTD-Zd-Niq" kind="relationship" relationship="rootViewController" id="Mv4-BI-v3k"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J65-Bq-Ay5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3492.753623188406" y="92.410714285714278"/>
         </scene>
     </scenes>
 </document>

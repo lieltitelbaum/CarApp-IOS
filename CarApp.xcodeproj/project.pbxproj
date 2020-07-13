@@ -12,6 +12,11 @@
 		BB5A346024BA363900247F55 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A345F24BA363900247F55 /* Profile.swift */; };
 		BB5A346224BA364500247F55 /* Accident.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346124BA364500247F55 /* Accident.swift */; };
 		BB5A346424BB163500247F55 /* FirebaseFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346324BB163400247F55 /* FirebaseFunctions.swift */; };
+		BB5A346624BB38AF00247F55 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346524BB38AF00247F55 /* Location.swift */; };
+		BB5A346824BB45DB00247F55 /* EmergencyServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346724BB45DB00247F55 /* EmergencyServicesViewController.swift */; };
+		BB5A346A24BB465800247F55 /* MyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346924BB465800247F55 /* MyJson.swift */; };
+		BB5A346C24BB6E4C00247F55 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346B24BB6E4C00247F55 /* Scanner.swift */; };
+		BB5A346E24BB6F2F00247F55 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */; };
 		BB6B413624B5FEA5007B58E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */; };
 		BB6B413824B5FEA5007B58E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413724B5FEA5007B58E4 /* SceneDelegate.swift */; };
 		BB6B413A24B5FEA5007B58E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413924B5FEA5007B58E4 /* ViewController.swift */; };
@@ -33,6 +38,11 @@
 		BB5A345F24BA363900247F55 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		BB5A346124BA364500247F55 /* Accident.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accident.swift; sourceTree = "<group>"; };
 		BB5A346324BB163400247F55 /* FirebaseFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFunctions.swift; sourceTree = "<group>"; };
+		BB5A346524BB38AF00247F55 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BB5A346724BB45DB00247F55 /* EmergencyServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyServicesViewController.swift; sourceTree = "<group>"; };
+		BB5A346924BB465800247F55 /* MyJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyJson.swift; sourceTree = "<group>"; };
+		BB5A346B24BB6E4C00247F55 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		BB6B413224B5FEA5007B58E4 /* CarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB6B413724B5FEA5007B58E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6B414B24B602FF007B58E4 /* Utills */,
-				BB6B414A24B602F0007B58E4 /* Controller */,
+				BB6B414A24B602F0007B58E4 /* View Controllers */,
 				BB6B414924B602BE007B58E4 /* Modules */,
 				BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */,
 				BB6B413724B5FEA5007B58E4 /* SceneDelegate.swift */,
@@ -117,19 +127,23 @@
 			children = (
 				BB5A345F24BA363900247F55 /* Profile.swift */,
 				BB5A346124BA364500247F55 /* Accident.swift */,
+				BB5A346524BB38AF00247F55 /* Location.swift */,
+				BB5A346B24BB6E4C00247F55 /* Scanner.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		BB6B414A24B602F0007B58E4 /* Controller */ = {
+		BB6B414A24B602F0007B58E4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BB6B413924B5FEA5007B58E4 /* ViewController.swift */,
 				BB6B414C24B6033E007B58E4 /* SignUpViewController.swift */,
 				BB6B414E24B6034D007B58E4 /* LogInViewController.swift */,
 				BB6B415024B60366007B58E4 /* HomeViewController.swift */,
+				BB5A346724BB45DB00247F55 /* EmergencyServicesViewController.swift */,
+				BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */,
 			);
-			path = Controller;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		BB6B414B24B602FF007B58E4 /* Utills */ = {
@@ -138,6 +152,7 @@
 				BBA2853324B72CF800781672 /* ValidateFields.swift */,
 				BB5A345D24B783D700247F55 /* Constants.swift */,
 				BB5A346324BB163400247F55 /* FirebaseFunctions.swift */,
+				BB5A346924BB465800247F55 /* MyJson.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -259,7 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB6B413A24B5FEA5007B58E4 /* ViewController.swift in Sources */,
+				BB5A346A24BB465800247F55 /* MyJson.swift in Sources */,
 				BBA2853424B72CF800781672 /* ValidateFields.swift in Sources */,
+				BB5A346824BB45DB00247F55 /* EmergencyServicesViewController.swift in Sources */,
 				BB5A346224BA364500247F55 /* Accident.swift in Sources */,
 				BB6B413624B5FEA5007B58E4 /* AppDelegate.swift in Sources */,
 				BB6B414D24B6033E007B58E4 /* SignUpViewController.swift in Sources */,
@@ -268,7 +285,10 @@
 				BB5A346424BB163500247F55 /* FirebaseFunctions.swift in Sources */,
 				BB6B415124B60366007B58E4 /* HomeViewController.swift in Sources */,
 				BB5A346024BA363900247F55 /* Profile.swift in Sources */,
+				BB5A346624BB38AF00247F55 /* Location.swift in Sources */,
+				BB5A346C24BB6E4C00247F55 /* Scanner.swift in Sources */,
 				BB5A345E24B783D700247F55 /* Constants.swift in Sources */,
+				BB5A346E24BB6F2F00247F55 /* ScannerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

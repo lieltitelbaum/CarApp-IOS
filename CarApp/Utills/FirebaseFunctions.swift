@@ -28,9 +28,10 @@ class FirebaseFunctions {
         
     }
     
-    static func readAccidentList() {
+    static func getAccidentList() {
         
     }
+    
     
     static func editUser() {
         
@@ -40,9 +41,14 @@ class FirebaseFunctions {
         
     }
     
+    static func getAllUsers() {
+        
+    }
+    
     static func saveImageToFireStore(imageUrl: String,key: String, folderNameFireStorage: String) {
         
     }
+    
     //TODO:: add this to login and signup
     //    if isUserLoggedIn() {
     //      // Show logout page
