@@ -53,12 +53,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957.9710144927537" y="99.776785714285708"/>
+            <point key="canvasLocation" x="-71" y="-70"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="MbT-ci-qCf">
             <objects>
-                <viewController id="D4o-rK-3c6" customClass="LogInViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginvc" id="D4o-rK-3c6" customClass="LogInViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eVv-ry-Ktf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,23 +119,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZM-xp-S97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2375" y="840"/>
+            <point key="canvasLocation" x="484" y="840"/>
         </scene>
-        <!--Scanner View Controller-->
+        <!--Scan Barcode-->
         <scene sceneID="dXJ-cY-cbE">
             <objects>
-                <viewController id="rH7-yt-RJB" customClass="ScannerViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scanVC" id="rH7-yt-RJB" customClass="ScannerViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pa7-7w-Cmb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="42W-aD-y81"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QD2-XD-hAq"/>
+                    <tabBarItem key="tabBarItem" title="Scan QR" image="scanner" id="5rY-ny-aiC"/>
+                    <navigationItem key="navigationItem" title="Scan Barcode" id="QD2-XD-hAq"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsn-Xs-9GM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5244.9275362318849" y="-260.49107142857144"/>
+            <point key="canvasLocation" x="3586" y="840"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="og6-hq-6LF">
@@ -234,7 +235,531 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0d4-Tv-4gJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="616" y="840"/>
+            <point key="canvasLocation" x="-507" y="840"/>
+        </scene>
+        <!--Accidents History-->
+        <scene sceneID="nIw-A3-xTI">
+            <objects>
+                <viewController id="bar-9t-NkP" customClass="AccidentHistoryViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Accidents History" image="history" id="gau-QU-8xR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Znr-d1-bkr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1365" y="840"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="2fl-rG-2f7">
+            <objects>
+                <viewController id="7LR-mh-Gfv" customClass="ProfileViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="auU-hW-tbG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ip5-1f-RFR">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whG-ql-TsR">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EDIT PROFILE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvV-Kz-Thk">
+                                                <rect key="frame" x="12" y="10" width="201" height="41"/>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank_profile" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-Lr-iUA">
+                                                <rect key="frame" x="130" y="71" width="154" height="160"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="160" id="hFk-jz-8kf"/>
+                                                </constraints>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="nEJ-dq-dhR" userLabel="Fields Stack View">
+                                                <rect key="frame" x="12" y="271" width="441.5" height="1526"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2dh-bC-jE0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="244.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIRST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CW-sc-Cga">
+                                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RN5-EO-P9n">
+                                                                <rect key="frame" x="161.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="firstNameEditTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="1Zw-xV-y0O"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iav-YM-L0e">
+                                                        <rect key="frame" x="0.0" y="49" width="89.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vw9-yr-0uC">
+                                                        <rect key="frame" x="0.0" y="91" width="236.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efp-s5-G9x">
+                                                                <rect key="frame" x="0.0" y="0.0" width="133.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqC-wG-Imw">
+                                                                <rect key="frame" x="153.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="lastNameEfitTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="dhg-de-gui"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Ha-Pd-xqx">
+                                                        <rect key="frame" x="0.0" y="140" width="87" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVh-sA-f9v">
+                                                        <rect key="frame" x="0.0" y="182" width="189" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Addresss" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1fY-QJ-dLx">
+                                                        <rect key="frame" x="0.0" y="230.5" width="129" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sv4-w4-xuk">
+                                                        <rect key="frame" x="0.0" y="272.5" width="295.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-bV-Tme">
+                                                                <rect key="frame" x="0.0" y="0.0" width="192.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e71-5Z-74O">
+                                                                <rect key="frame" x="212.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="phoneNumberEditTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="m7G-bs-him"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c4w-1W-McJ">
+                                                        <rect key="frame" x="0.0" y="321.5" width="125" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOVERMENT ID NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgq-BG-x9y">
+                                                        <rect key="frame" x="0.0" y="363.5" width="287.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Goverment ID number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="16i-9G-QoB">
+                                                        <rect key="frame" x="0.0" y="412" width="184" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="xeL-1W-0pO">
+                                                        <rect key="frame" x="0.0" y="454" width="261" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRO-hT-bSD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="158" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtY-Lc-248">
+                                                                <rect key="frame" x="178" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="carNumberEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="0Ne-d5-KTf"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6B-nU-YHe">
+                                                        <rect key="frame" x="0.0" y="503" width="101" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="frf-hn-zcF">
+                                                        <rect key="frame" x="0.0" y="545" width="240.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR MODEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCb-Hp-wur">
+                                                                <rect key="frame" x="0.0" y="0.0" width="137.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ego-2h-DVF">
+                                                                <rect key="frame" x="157.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="carModelEditBtn:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="7xe-zW-k72"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Model" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z4Q-az-Ugd">
+                                                        <rect key="frame" x="0.0" y="594" width="84" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IrF-vf-enj">
+                                                        <rect key="frame" x="0.0" y="636" width="238" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR COLOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDt-rt-dI0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="135" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9x-RH-fN8">
+                                                                <rect key="frame" x="155" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="carColorEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="TH5-bp-gig"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Color" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZAi-lT-qHi">
+                                                        <rect key="frame" x="0.0" y="685" width="78" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ri8-Un-zcw">
+                                                        <rect key="frame" x="0.0" y="727" width="265" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRIVER NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOu-Ac-bWb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziB-DG-zS7">
+                                                                <rect key="frame" x="182" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="driverNameEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="uFa-Xc-QGu"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Driver Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-f4-KjU">
+                                                        <rect key="frame" x="0.0" y="776" width="104" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JTQ-EI-V2v">
+                                                        <rect key="frame" x="0.0" y="818" width="214.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0W-PA-9In">
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Sy-1Y-KSq">
+                                                                <rect key="frame" x="131.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="addressEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="jpq-EE-NrA"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scV-7r-M1z">
+                                                        <rect key="frame" x="0.0" y="867" width="69" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JFv-4Q-Jgi">
+                                                        <rect key="frame" x="0.0" y="909" width="313" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LICENCE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Pj-JY-eVc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="210" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czu-RR-mmQ">
+                                                                <rect key="frame" x="230" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="licenceNumberEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="0pK-cd-w5z"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Licence Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yw6-h2-tp9">
+                                                        <rect key="frame" x="0.0" y="958" width="137" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="J7o-Re-dWp">
+                                                        <rect key="frame" x="0.0" y="1000" width="308.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OWNER ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ya-sI-nSi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="205.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zds-3V-idh">
+                                                                <rect key="frame" x="225.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="ownerAddressEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="xKM-Am-vJP"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Owner Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k0u-eZ-NJZ">
+                                                        <rect key="frame" x="0.0" y="1049" width="127" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6qc-ux-GQS">
+                                                        <rect key="frame" x="0.0" y="1091" width="389.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OWNER PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZS-oy-RXT">
+                                                                <rect key="frame" x="0.0" y="0.0" width="286.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzd-xr-GfD">
+                                                                <rect key="frame" x="306.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="ownerPhoneNumberEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="0Kh-l0-8Ok"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Owner Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fFQ-rG-5Nv">
+                                                        <rect key="frame" x="0.0" y="1140" width="183" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vOQ-FI-D9p">
+                                                        <rect key="frame" x="0.0" y="1182" width="441.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE COMPANY NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyc-ug-QjD">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxs-hK-OZq">
+                                                                <rect key="frame" x="358.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="insuranceCompanyNameEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="xDH-hs-vaT"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Company Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dkZ-o8-Xcj">
+                                                        <rect key="frame" x="0.0" y="1231" width="221" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="E6k-fl-oFO">
+                                                        <rect key="frame" x="0.0" y="1273" width="441" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE POLICY NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTP-FR-14g">
+                                                                <rect key="frame" x="0.0" y="0.0" width="338" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80c-qz-uh1">
+                                                                <rect key="frame" x="358" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="insurancePolicyNumberEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="7y1-GR-nCa"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Policy Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dOg-AM-sFN">
+                                                        <rect key="frame" x="0.0" y="1322" width="210.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8HO-4u-Wys">
+                                                        <rect key="frame" x="0.0" y="1364" width="402.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE AGENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMf-RK-xVY">
+                                                                <rect key="frame" x="0.0" y="0.0" width="299.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmx-dq-Hfn">
+                                                                <rect key="frame" x="319.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="insuranceAgentNameEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="Ifl-5W-9Hw"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Agent Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CVL-S7-QrK">
+                                                        <rect key="frame" x="0.0" y="1413" width="190.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="WIA-JI-7ME">
+                                                        <rect key="frame" x="0.0" y="1455" width="422.5" height="29"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE AGENT PHONE " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sx-hI-iAH">
+                                                                <rect key="frame" x="0.0" y="0.0" width="319.5" height="28.5"/>
+                                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DOg-RS-nKq">
+                                                                <rect key="frame" x="339.5" y="0.0" width="83" height="29"/>
+                                                                <state key="normal" title="Button" image="Icon-Small"/>
+                                                                <connections>
+                                                                    <action selector="insuranceAgentPhoneEditBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="zuo-4V-l3x"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Agent Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wJg-1X-uSl">
+                                                        <rect key="frame" x="0.0" y="1504" width="266.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBR-Tw-TCQ" userLabel="line">
+                                                <rect key="frame" x="40" y="1827" width="334" height="5"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="5" id="wHB-5G-cl1"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOG OUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccS-wx-Trj">
+                                                <rect key="frame" x="20" y="1852" width="374" height="31.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRP-Wu-Ivb" userLabel="log Out Btn">
+                                                <rect key="frame" x="25" y="1898.5" width="389" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <state key="normal" title="Button" image="logOut"/>
+                                                <connections>
+                                                    <action selector="logOutBtnTapped:" destination="7LR-mh-Gfv" eventType="touchUpInside" id="G71-ol-QKZ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ccS-wx-Trj" secondAttribute="trailing" constant="20" id="0Os-uA-mFk"/>
+                                            <constraint firstItem="JvV-Kz-Thk" firstAttribute="top" secondItem="whG-ql-TsR" secondAttribute="top" constant="10" id="3rU-qc-K7d"/>
+                                            <constraint firstItem="bRP-Wu-Ivb" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="25" id="4u5-md-zLO"/>
+                                            <constraint firstAttribute="trailing" secondItem="bRP-Wu-Ivb" secondAttribute="trailing" id="9zs-sK-a2P"/>
+                                            <constraint firstItem="ccS-wx-Trj" firstAttribute="top" secondItem="rBR-Tw-TCQ" secondAttribute="bottom" constant="20" id="L6n-ao-ngL"/>
+                                            <constraint firstItem="JvV-Kz-Thk" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="12" id="SIa-Bt-Ew6"/>
+                                            <constraint firstItem="ccS-wx-Trj" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="20" id="T0l-WN-WKl"/>
+                                            <constraint firstItem="bRP-Wu-Ivb" firstAttribute="top" secondItem="ccS-wx-Trj" secondAttribute="bottom" constant="15" id="U6n-WQ-p9V"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JvV-Kz-Thk" secondAttribute="trailing" constant="20" symbolic="YES" id="WBK-MV-jzl"/>
+                                            <constraint firstAttribute="trailing" secondItem="1S1-Lr-iUA" secondAttribute="trailing" constant="130" id="ZwJ-P4-kdD"/>
+                                            <constraint firstItem="nEJ-dq-dhR" firstAttribute="top" secondItem="1S1-Lr-iUA" secondAttribute="bottom" constant="40" id="bUM-fl-ZK7"/>
+                                            <constraint firstItem="1S1-Lr-iUA" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="130" id="crx-Ce-awK"/>
+                                            <constraint firstItem="rBR-Tw-TCQ" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="40" id="gcs-Kk-jBl"/>
+                                            <constraint firstAttribute="trailing" secondItem="rBR-Tw-TCQ" secondAttribute="trailing" constant="40" id="l3h-KB-X4t"/>
+                                            <constraint firstItem="rBR-Tw-TCQ" firstAttribute="top" secondItem="nEJ-dq-dhR" secondAttribute="bottom" constant="30" id="lHP-3k-g11"/>
+                                            <constraint firstAttribute="height" constant="2000" id="o0f-2b-kV8"/>
+                                            <constraint firstItem="1S1-Lr-iUA" firstAttribute="top" secondItem="JvV-Kz-Thk" secondAttribute="bottom" constant="20" id="pft-B4-vmn"/>
+                                            <constraint firstItem="nEJ-dq-dhR" firstAttribute="leading" secondItem="whG-ql-TsR" secondAttribute="leading" constant="12" id="svN-Ow-xOp"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="whG-ql-TsR" firstAttribute="leading" secondItem="b5q-9t-pK8" secondAttribute="leading" id="DUr-Z4-d4n"/>
+                                    <constraint firstItem="whG-ql-TsR" firstAttribute="width" secondItem="rwc-6p-mBV" secondAttribute="width" id="Ptx-dF-ASn"/>
+                                    <constraint firstItem="whG-ql-TsR" firstAttribute="bottom" secondItem="b5q-9t-pK8" secondAttribute="bottom" id="cMj-2L-t2J"/>
+                                    <constraint firstItem="whG-ql-TsR" firstAttribute="top" secondItem="b5q-9t-pK8" secondAttribute="top" id="tFf-sQ-qLy"/>
+                                    <constraint firstItem="whG-ql-TsR" firstAttribute="trailing" secondItem="b5q-9t-pK8" secondAttribute="trailing" id="xqL-Ad-f0B"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="b5q-9t-pK8"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="rwc-6p-mBV"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="leading" secondItem="F06-hJ-ntj" secondAttribute="leading" id="1KD-G9-pD7"/>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="width" secondItem="F06-hJ-ntj" secondAttribute="width" id="JXZ-Fu-Urw"/>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="height" secondItem="F06-hJ-ntj" secondAttribute="height" id="WwS-fE-pTy"/>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="trailing" secondItem="F06-hJ-ntj" secondAttribute="trailing" id="r4V-rs-Q0Q"/>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="bottom" secondItem="F06-hJ-ntj" secondAttribute="bottom" id="sK7-M5-aoX"/>
+                            <constraint firstItem="Ip5-1f-RFR" firstAttribute="top" secondItem="F06-hJ-ntj" secondAttribute="top" id="zRK-Ks-OtI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="F06-hJ-ntj"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile_icon" id="5No-sv-PKJ"/>
+                    <connections>
+                        <outlet property="addressTextField" destination="scV-7r-M1z" id="nkL-bH-6Wa"/>
+                        <outlet property="carColorTextField" destination="ZAi-lT-qHi" id="oKl-PC-o0u"/>
+                        <outlet property="carModelTextField" destination="Z4Q-az-Ugd" id="Xpi-oX-cX7"/>
+                        <outlet property="carNumberTextField" destination="Z6B-nU-YHe" id="DqZ-gm-O5A"/>
+                        <outlet property="driverNameTextField" destination="lKn-f4-KjU" id="zFc-Xo-Tb8"/>
+                        <outlet property="emailTextField" destination="1fY-QJ-dLx" id="47V-As-rNB"/>
+                        <outlet property="firstNameTextField" destination="iav-YM-L0e" id="pF5-S6-2cC"/>
+                        <outlet property="govermentIDTextField" destination="16i-9G-QoB" id="jCG-bq-SfZ"/>
+                        <outlet property="insuranceAgentNameTextField" destination="CVL-S7-QrK" id="iJ9-V7-GIH"/>
+                        <outlet property="insuranceAgentPhoneTextField" destination="wJg-1X-uSl" id="5DO-CG-qdf"/>
+                        <outlet property="insuranceCompanyNameTextField" destination="dkZ-o8-Xcj" id="iT4-Tn-78x"/>
+                        <outlet property="insurancePolicyNumberTextField" destination="dOg-AM-sFN" id="XOe-Pv-EBu"/>
+                        <outlet property="lastNameTextField" destination="5Ha-Pd-xqx" id="ik7-4R-J8g"/>
+                        <outlet property="licenceNumberTextField" destination="yw6-h2-tp9" id="8Hh-2a-tVv"/>
+                        <outlet property="logOutBtn" destination="bRP-Wu-Ivb" id="rOe-EK-7m3"/>
+                        <outlet property="ownerAddressTextField" destination="k0u-eZ-NJZ" id="xki-aY-XzC"/>
+                        <outlet property="ownerPhoneTextField" destination="fFQ-rG-5Nv" id="bJ6-38-4iz"/>
+                        <outlet property="phoneNumberTextField" destination="c4w-1W-McJ" id="gen-gw-TBx"/>
+                        <outlet property="profileImage" destination="1S1-Lr-iUA" id="Bn8-86-Alt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHv-au-9BO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2130" y="840"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="QIQ-Nf-IeV">
+            <objects>
+                <tabBarController storyboardIdentifier="tabbarvc" id="3uy-L4-PBN" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="MSY-gN-5zr"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="u3l-em-B0K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="rH7-yt-RJB" kind="relationship" relationship="viewControllers" id="SOi-4A-Yd4"/>
+                        <segue destination="44c-dQ-jlc" kind="relationship" relationship="viewControllers" id="mbl-hE-2cp"/>
+                        <segue destination="bar-9t-NkP" kind="relationship" relationship="viewControllers" id="2Jc-mQ-tUH"/>
+                        <segue destination="7LR-mh-Gfv" kind="relationship" relationship="viewControllers" id="Hy2-WD-nWn"/>
+                        <segue destination="tI8-To-9Yn" kind="relationship" relationship="viewControllers" id="IL8-6B-EDn"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iD2-ZJ-Pp7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="-70"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="opq-gn-PtI">
@@ -245,33 +770,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="q3h-lw-5AE" userLabel="Scan Stack View">
-                                <rect key="frame" x="40" y="128" width="334" height="271"/>
+                                <rect key="frame" x="40" y="128" width="334" height="180"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Liel Titelbaum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oen-sz-eYy">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="91"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oen-sz-eYy">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5by-9g-4ea">
-                                        <rect key="frame" x="0.0" y="141" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="334" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="l7L-FI-LG6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Scan Barcode"/>
                                         <connections>
-                                            <action selector="scanbarcodeClicked:" destination="kTD-Zd-Niq" eventType="touchUpInside" id="KBC-Ye-iQZ"/>
-                                            <segue destination="rH7-yt-RJB" kind="show" id="OHN-S3-fxf"/>
+                                            <segue destination="rH7-yt-RJB" kind="show" id="g20-uw-sLa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgF-gF-3QJ">
-                                        <rect key="frame" x="0.0" y="241" width="334" height="30"/>
+                                        <rect key="frame" x="0.0" y="150" width="334" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Emergency Services"/>
                                         <connections>
-                                            <action selector="emergencyClicked:" destination="kTD-Zd-Niq" eventType="touchUpInside" id="2tY-tt-yjT"/>
-                                            <segue destination="44c-dQ-jlc" kind="show" id="e50-yn-yGD"/>
+                                            <segue destination="44c-dQ-jlc" kind="show" id="O6s-3t-QNS"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -280,7 +803,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmf-CN-iE9">
-                                <rect key="frame" x="40" y="499" width="334" height="323"/>
+                                <rect key="frame" x="40" y="408" width="334" height="365"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -305,7 +828,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDZ-kw-3mO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4402.898550724638" y="92.410714285714278"/>
+            <point key="canvasLocation" x="4084" y="-70"/>
         </scene>
         <!--Emergency Services-->
         <scene sceneID="Hg9-Jy-79Q">
@@ -316,7 +839,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-pn-EdG">
-                                <rect key="frame" x="40" y="238" width="334" height="190"/>
+                                <rect key="frame" x="40" y="194" width="334" height="190"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJq-SC-LgY">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
@@ -364,6 +887,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DVL-Kt-HgQ"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Emergency" image="emergency" id="eCG-sM-WXX"/>
                     <navigationItem key="navigationItem" title="Emergency Services" id="Cg2-b2-DSv"/>
                     <connections>
                         <outlet property="callFireBtn" destination="Xf6-X1-eFc" id="EhE-i0-NB1"/>
@@ -373,7 +897,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SYg-ie-naW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5244.9275362318849" y="459.375"/>
+            <point key="canvasLocation" x="4581" y="840"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FDz-ZB-gaC">
@@ -392,26 +916,40 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIB-Rd-Rz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="99.776785714285708"/>
+            <point key="canvasLocation" x="-942" y="-70"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gys-2i-thY">
+        <!--Home-->
+        <scene sceneID="f5z-3v-n1f">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HMI-ZE-lgh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tI8-To-9Yn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="iQj-aW-jPm"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="bez-8M-NZV"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9e3-69-KCT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RPc-aO-x3Z">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="kTD-Zd-Niq" kind="relationship" relationship="rootViewController" id="Mv4-BI-v3k"/>
+                        <segue destination="kTD-Zd-Niq" kind="relationship" relationship="rootViewController" id="taR-xO-WFW"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J65-Bq-Ay5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZNJ-Em-ZiO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3492.753623188406" y="92.410714285714278"/>
+            <point key="canvasLocation" x="2665" y="-70"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="mbl-hE-2cp"/>
+        <segue reference="SOi-4A-Yd4"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="Icon-Small" width="29" height="29"/>
+        <image name="blank_profile" width="300" height="300"/>
+        <image name="emergency" width="24" height="24"/>
+        <image name="history" width="29" height="29"/>
+        <image name="home" width="29" height="29"/>
+        <image name="logOut" width="29" height="29"/>
+        <image name="profile_icon" width="29" height="29"/>
+        <image name="scanner" width="29" height="29"/>
+    </resources>
 </document>

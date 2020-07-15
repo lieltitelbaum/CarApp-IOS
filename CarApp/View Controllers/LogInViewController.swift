@@ -37,9 +37,10 @@ class LogInViewController: UIViewController {
                 self.errorLbl.alpha = 1 //showing the error
             }
             else {
-                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.homeViewController) as? HomeViewController
-                      
-                self.view.window?.rootViewController = homeViewController
+                let tabBarViewController = self.storyboard?.instantiateViewController(identifier: "tabbarvc") as? UITabBarController//TODO:: const
+
+                self.dismiss(animated: false, completion: nil)
+                self.view.window?.rootViewController = tabBarViewController
                 self.view.window?.makeKeyAndVisible()
             }
         }

@@ -17,6 +17,9 @@
 		BB5A346A24BB465800247F55 /* MyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346924BB465800247F55 /* MyJson.swift */; };
 		BB5A346C24BB6E4C00247F55 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346B24BB6E4C00247F55 /* Scanner.swift */; };
 		BB5A346E24BB6F2F00247F55 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */; };
+		BB62B1C324BF0E4900244E47 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62B1C224BF0E4900244E47 /* ProfileViewController.swift */; };
+		BB62B1C524BF0EE400244E47 /* AccidentHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62B1C424BF0EE400244E47 /* AccidentHistoryViewController.swift */; };
+		BB62B1C724BF14E000244E47 /* Switcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62B1C624BF14E000244E47 /* Switcher.swift */; };
 		BB6B413624B5FEA5007B58E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */; };
 		BB6B413824B5FEA5007B58E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413724B5FEA5007B58E4 /* SceneDelegate.swift */; };
 		BB6B413A24B5FEA5007B58E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B413924B5FEA5007B58E4 /* ViewController.swift */; };
@@ -43,6 +46,9 @@
 		BB5A346924BB465800247F55 /* MyJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyJson.swift; sourceTree = "<group>"; };
 		BB5A346B24BB6E4C00247F55 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		BB62B1C224BF0E4900244E47 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BB62B1C424BF0EE400244E47 /* AccidentHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentHistoryViewController.swift; sourceTree = "<group>"; };
+		BB62B1C624BF14E000244E47 /* Switcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switcher.swift; sourceTree = "<group>"; };
 		BB6B413224B5FEA5007B58E4 /* CarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB6B413724B5FEA5007B58E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +148,8 @@
 				BB6B415024B60366007B58E4 /* HomeViewController.swift */,
 				BB5A346724BB45DB00247F55 /* EmergencyServicesViewController.swift */,
 				BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */,
+				BB62B1C224BF0E4900244E47 /* ProfileViewController.swift */,
+				BB62B1C424BF0EE400244E47 /* AccidentHistoryViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -153,6 +161,7 @@
 				BB5A345D24B783D700247F55 /* Constants.swift */,
 				BB5A346324BB163400247F55 /* FirebaseFunctions.swift */,
 				BB5A346924BB465800247F55 /* MyJson.swift */,
+				BB62B1C624BF14E000244E47 /* Switcher.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -280,12 +289,15 @@
 				BB5A346224BA364500247F55 /* Accident.swift in Sources */,
 				BB6B413624B5FEA5007B58E4 /* AppDelegate.swift in Sources */,
 				BB6B414D24B6033E007B58E4 /* SignUpViewController.swift in Sources */,
+				BB62B1C324BF0E4900244E47 /* ProfileViewController.swift in Sources */,
+				BB62B1C524BF0EE400244E47 /* AccidentHistoryViewController.swift in Sources */,
 				BB6B414F24B6034D007B58E4 /* LogInViewController.swift in Sources */,
 				BB6B413824B5FEA5007B58E4 /* SceneDelegate.swift in Sources */,
 				BB5A346424BB163500247F55 /* FirebaseFunctions.swift in Sources */,
 				BB6B415124B60366007B58E4 /* HomeViewController.swift in Sources */,
 				BB5A346024BA363900247F55 /* Profile.swift in Sources */,
 				BB5A346624BB38AF00247F55 /* Location.swift in Sources */,
+				BB62B1C724BF14E000244E47 /* Switcher.swift in Sources */,
 				BB5A346C24BB6E4C00247F55 /* Scanner.swift in Sources */,
 				BB5A345E24B783D700247F55 /* Constants.swift in Sources */,
 				BB5A346E24BB6F2F00247F55 /* ScannerViewController.swift in Sources */,

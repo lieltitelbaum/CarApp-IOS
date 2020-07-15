@@ -33,7 +33,7 @@ class FirebaseFunctions {
     }
     
     
-    static func editUser() {
+    static func updateValueInProfile(key: String, val: Any, path: String) {
         
     }
     
@@ -48,11 +48,4 @@ class FirebaseFunctions {
     static func saveImageToFireStore(imageUrl: String,key: String, folderNameFireStorage: String) {
         
     }
-    
-    //TODO:: add this to login and signup
-    //    if isUserLoggedIn() {
-    //      // Show logout page
-    //    } else {
-    //      // Show login page
-    //    }
 }

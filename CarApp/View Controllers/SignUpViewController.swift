@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 
 class SignUpViewController: UIViewController {
-
+    
     @IBOutlet weak var firstNameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var lastNameTxt: UITextField!
@@ -23,9 +23,9 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-   
+    
     func validateFields() -> String? {
         //Check that all fields are fileed in
         if firstNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || lastNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
@@ -49,7 +49,7 @@ class SignUpViewController: UIViewController {
         
         if error != nil{
             //There's something wrong with the fields -> show error msg
-          showError(message: error!)
+            showError(message: error!)
         }
         else {
             //create the user
@@ -86,10 +86,11 @@ class SignUpViewController: UIViewController {
     }
     
     func transitionToHomeScreen() {
-        let homeViewController = storyboard?.instantiateViewController(identifier: Constants.homeViewController) as? HomeViewController
+        let tabBarViewController = self.storyboard?.instantiateViewController(identifier: "tabbarvc") as? UITabBarController
         
-        view.window?.rootViewController = homeViewController
-        view.window?.makeKeyAndVisible()
+        self.dismiss(animated: false, completion: nil)
+        self.view.window?.rootViewController = tabBarViewController
+        self.view.window?.makeKeyAndVisible()
     }
     
     func showError(message: String) {

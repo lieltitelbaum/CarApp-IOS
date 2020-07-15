@@ -10,14 +10,18 @@ import Foundation
 
 class Accident {
     var accidentKey = ""
-    var user1: Profile = Profile()
-    var user2: Profile = Profile()
+    var user1: Dictionary<String, Any>
+    var user2: Dictionary<String, Any>
     var accidentLocation:Location = Location()
     var accidentDate: String = ""
-    var photos: Set = Set<String>()
+    var photos: Dictionary <String, String> //dictionary of string-> photoId, string->photoUrl
     
-    init(user1: Profile, user2: Profile, accidentLocation: Location, photos: Set<String>) {
-        self.accidentKey = user1.getUserKeyId() + "_" + user2.getUserKeyId()
+    var dict: [String:Any] = [:]
+    
+    init(user1: Dictionary<String, Any>, user2: Dictionary<String,Any>, accidentLocation: Location, photos: Dictionary<String, String> ) {
+        let user1Key: String! = user1[DictKeyConstants.profileKeyId] as? String
+        let user2Key: String! = user2[DictKeyConstants.profileKeyId] as? String
+        self.accidentKey = user1Key + "_" + user2Key
         self.user1 = user1
         self.user2 = user2
         self.accidentLocation = accidentLocation
@@ -30,11 +34,37 @@ class Accident {
         self.photos = photos
     }
     
-    func addPhoto(photo: String) {
-        photos.insert(photo)
+    func convertToDict() -> Dictionary<String, Any> {
+        dict = [DictKeyConstants.accidentKey: self.accidentKey, DictKeyConstants.accidentUser1:self.user1, DictKeyConstants.accidentUser2: self.user2, DictKeyConstants.accidentLocation: self.accidentLocation, DictKeyConstants.accidentDate: self.accidentDate, DictKeyConstants.accidentPhotos: self.photos]
+        return dict
     }
     
-    func removePhoto(photo: String){
-        photos.remove(photo)
+    func setDate(date: String){
+        self.accidentDate = date
     }
+    
+    private func setAccidentKey(key: String){
+        self.accidentKey = key
+    }
+    
+    static func convertDictToAccidentObj(dict: Dictionary<String, Any>) -> Accident {
+        let accidentKey = dict[DictKeyConstants.accidentKey] as! String
+        let user1 = dict[DictKeyConstants.accidentUser1] as! Dictionary<String, Any>
+        let user2 = dict[DictKeyConstants.accidentUser2] as! Dictionary<String, Any>
+        let location = dict[DictKeyConstants.accidentLocation] as! Location
+        let date = dict[DictKeyConstants.accidentDate] as! String
+        let photos = dict[DictKeyConstants.accidentPhotos] as! Dictionary <String, String>
+        let accident: Accident = Accident(user1: user1, user2: user2, accidentLocation: location, photos: photos) //note: check if values are changing
+        accident.setDate(date: date)
+        accident.setAccidentKey(key: accidentKey)
+        return accident
+    }
+    
+//    func addPhoto(photo: String) {
+//        photos.insert(photo)
+//    }
+//
+//    func removePhoto(photo: String){
+//        photos.remove(photo)
+//    }
 }
