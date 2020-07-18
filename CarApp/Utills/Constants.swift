@@ -13,6 +13,8 @@ class Constants{
     static let homeViewController = "homeVC"
     static let loginRegisterViewController = "loginRegVC"
     static let scanViewController = "scanVC"
+    static let firebaseStorageRefUrl = "gs://car-app-ios.appspot.com"
+    static let moveToAccidentInfoVc = "detailsVC"
     
 }
 

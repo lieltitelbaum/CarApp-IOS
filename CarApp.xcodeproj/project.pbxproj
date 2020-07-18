@@ -31,6 +31,8 @@
 		BB6B415124B60366007B58E4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6B415024B60366007B58E4 /* HomeViewController.swift */; };
 		BB6B415324B655F6007B58E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6B415224B655F6007B58E4 /* GoogleService-Info.plist */; };
 		BBA2853424B72CF800781672 /* ValidateFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA2853324B72CF800781672 /* ValidateFields.swift */; };
+		BBA8F89C24C2666300F05334 /* AccidentHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA8F89B24C2666300F05334 /* AccidentHistoryTableViewCell.swift */; };
+		BBA8F89E24C27ACA00F05334 /* AccidentInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA8F89D24C27ACA00F05334 /* AccidentInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		BB6B415024B60366007B58E4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BB6B415224B655F6007B58E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BBA2853324B72CF800781672 /* ValidateFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFields.swift; sourceTree = "<group>"; };
+		BBA8F89B24C2666300F05334 /* AccidentHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		BBA8F89D24C27ACA00F05334 /* AccidentInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccidentInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				BB5A346124BA364500247F55 /* Accident.swift */,
 				BB5A346524BB38AF00247F55 /* Location.swift */,
 				BB5A346B24BB6E4C00247F55 /* Scanner.swift */,
+				BBA8F89B24C2666300F05334 /* AccidentHistoryTableViewCell.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				BB5A346D24BB6F2F00247F55 /* ScannerViewController.swift */,
 				BB62B1C224BF0E4900244E47 /* ProfileViewController.swift */,
 				BB62B1C424BF0EE400244E47 /* AccidentHistoryViewController.swift */,
+				BBA8F89D24C27ACA00F05334 /* AccidentInfoViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -288,11 +294,13 @@
 				BB5A346824BB45DB00247F55 /* EmergencyServicesViewController.swift in Sources */,
 				BB5A346224BA364500247F55 /* Accident.swift in Sources */,
 				BB6B413624B5FEA5007B58E4 /* AppDelegate.swift in Sources */,
+				BBA8F89C24C2666300F05334 /* AccidentHistoryTableViewCell.swift in Sources */,
 				BB6B414D24B6033E007B58E4 /* SignUpViewController.swift in Sources */,
 				BB62B1C324BF0E4900244E47 /* ProfileViewController.swift in Sources */,
 				BB62B1C524BF0EE400244E47 /* AccidentHistoryViewController.swift in Sources */,
 				BB6B414F24B6034D007B58E4 /* LogInViewController.swift in Sources */,
 				BB6B413824B5FEA5007B58E4 /* SceneDelegate.swift in Sources */,
+				BBA8F89E24C27ACA00F05334 /* AccidentInfoViewController.swift in Sources */,
 				BB5A346424BB163500247F55 /* FirebaseFunctions.swift in Sources */,
 				BB6B415124B60366007B58E4 /* HomeViewController.swift in Sources */,
 				BB5A346024BA363900247F55 /* Profile.swift in Sources */,

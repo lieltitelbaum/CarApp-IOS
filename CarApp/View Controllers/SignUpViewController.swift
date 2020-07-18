@@ -20,38 +20,79 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var userIdNumberTxt: UITextField!
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var firstNameErrorLbl: UILabel!
+    @IBOutlet weak var lastNameErrorLbl: UILabel!
+    @IBOutlet weak var emailErrorLbl: UILabel!
+    @IBOutlet weak var passwordErrorLbl: UILabel!
+    @IBOutlet weak var userIdErrorLbl: UITextField!
+    @IBOutlet weak var phoneNumberErrorLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideLabels()
+        
+    }
+    func hideLabels() {
+        passwordErrorLbl.alpha = 0
+        phoneNumberErrorLbl.alpha = 0
+        errorLbl.alpha = 0
+        emailErrorLbl.alpha = 0
+        userIdErrorLbl.alpha = 0
+        lastNameErrorLbl.alpha = 0
+        firstNameErrorLbl.alpha = 0
     }
     
-    func validateFields() -> String? {
-        //Check that all fields are fileed in
-        if firstNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || lastNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in all fields."
+    func isAllFieldsValid() -> Bool {
+        var flag:Bool = true
+        
+        hideLabels()
+        
+        if !ValidateFields.isPhoneNumberValid((phoneNumberTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) {
+            phoneNumberErrorLbl.alpha = 1
+            phoneNumberErrorLbl.text = "Phone number is not in the correct format, need to be 10 digits."
+            flag = false
+        }
+        
+        if !ValidateFields.isValidEmail((emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) {
+            emailErrorLbl.alpha = 1
+            emailErrorLbl.text = "Email is not in the correct format."
+            flag = false
+        }
+        
+        if !ValidateFields.isGovernmentIdValid((userIdNumberTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) {
+            userIdErrorLbl.alpha = 1
+            userIdErrorLbl.text = "ID number is not in the correct format, need to be 9 digits."
+            flag = false
         }
         
         let cleanPass = passwordTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if ValidateFields.isPasswordValid(cleanPass) == false {
+        if !ValidateFields.isPasswordValid(cleanPass) {
             //password is not secure enough
-            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+            passwordErrorLbl.alpha = 1
+            passwordErrorLbl.text = "Please make sure your password is at least 8 characters, contains a special character and a number."
+            flag = false
         }
         
-        if ValidateFields.isValidEmail((emailTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) == false {
-            return "Email is not in the correct format"
+        if !ValidateFields.isFieldIsNonNumeric((firstNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) {
+            firstNameErrorLbl.alpha = 1
+            firstNameErrorLbl.text = "First name must contain only letters."
+            flag = false
         }
-        return nil
+        
+        if !ValidateFields.isFieldIsNonNumeric((lastNameTxt.text?.trimmingCharacters(in: .whitespacesAndNewlines))!) {
+            lastNameErrorLbl.alpha = 1
+            lastNameErrorLbl.text = "Last name must contain only letters."
+            flag = false
+        }
+        return flag
     }
+    
     @IBAction func signUpPressed(_ sender: Any) {
         //validate the fields
-        let error = validateFields()
+        let isValid = isAllFieldsValid()
         
-        if error != nil{
-            //There's something wrong with the fields -> show error msg
-            showError(message: error!)
-        }
-        else {
+        if isValid{
             //create the user
             let firstName = firstNameTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let lastName = lastNameTxt.text!.trimmingCharacters(in: .whitespacesAndNewlines)

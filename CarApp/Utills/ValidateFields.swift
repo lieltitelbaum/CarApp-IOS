@@ -33,12 +33,22 @@ class ValidateFields {
            return nil
        }
     
-//    static func isPhoneNumberValid(_ phone: String) -> Bool {
-//
-//    }
-//
-//    static func isGovermentIdValid(_ id: String) -> Bool {
-//
-//    }
+    static func isPhoneNumberValid(_ phone: String) -> Bool {
+        let phoneRegex = "^[0][5][0|2|3|4|5|9]{1}[-]{0,1}[0-9]{7}$"
+               let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+               return phoneTest.evaluate(with: phone)
+    }
+
+    static func isGovernmentIdValid(_ id: String) -> Bool {
+        let idRegax = "([0-9]){9}$"
+        let idTest = NSPredicate(format: "SELF MATCHES %@", idRegax)
+        return idTest.evaluate(with: id)
+    }
     
+    static func isFieldIsNonNumeric(_ txt: String) -> Bool {
+        let lettersRegax = "^[A-Za-z]+$"
+        let lettersTest = NSPredicate(format: "SELF MATCHES %@", lettersRegax)
+        return lettersTest.evaluate(with: txt)
+    }
+
 }
