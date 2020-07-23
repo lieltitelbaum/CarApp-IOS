@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
     
     func getUserNameAndPresentIt(userUID: String) {
         //retrive user first and last name and show it in the welcome label
-        let firebasePath = db.collection(Constants.FIRE_STORE_DB_PATH).document(userUID)
+        let firebasePath = db.collection(Constants.fireStoreDbUsers).document(userUID)
         firebasePath.getDocument { (document, error) in
             if let document = document, document.exists {
                 let firstName = document.get("firstName")

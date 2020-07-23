@@ -9,8 +9,8 @@
 import UIKit
 import FirebaseAuth
 
-class LogInViewController: UIViewController {
-
+class LogInViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var logInBtn: UIButton!
@@ -18,6 +18,11 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        emailTxt.delegate = self
+        passwordTxt.delegate = self
+        
+        errorLbl.alpha = 0//label is not shown
     }
     
     @IBAction func logInPressed(_ sender: Any) {
@@ -28,6 +33,13 @@ class LogInViewController: UIViewController {
         signIn(email: email, password: password)
     }
     
+    //UITextFieldDelegate Method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //When pressed on the return button in the keyboard, the keyboard is dismmised
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if error != nil {
@@ -36,7 +48,7 @@ class LogInViewController: UIViewController {
             }
             else {
                 let tabBarViewController = self.storyboard?.instantiateViewController(identifier: "tabbarvc") as? UITabBarController//TODO:: const
-
+                
                 self.dismiss(animated: false, completion: nil)
                 self.view.window?.rootViewController = tabBarViewController
                 self.view.window?.makeKeyAndVisible()

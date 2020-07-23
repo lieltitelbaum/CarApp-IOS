@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import Firebase
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var firstNameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
@@ -31,8 +31,9 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         hideLabels()
-        
+        delgateAllTextFields()
     }
+    
     func hideLabels() {
         passwordErrorLbl.alpha = 0
         phoneNumberErrorLbl.alpha = 0
@@ -41,6 +42,15 @@ class SignUpViewController: UIViewController {
         userIdErrorLbl.alpha = 0
         lastNameErrorLbl.alpha = 0
         firstNameErrorLbl.alpha = 0
+    }
+    
+    func delgateAllTextFields() {
+        firstNameTxt.delegate = self
+        lastNameTxt.delegate = self
+        emailTxt.delegate = self
+        passwordTxt.delegate = self
+        phoneNumberTxt.delegate = self
+        userIdNumberTxt.delegate = self
     }
     
     func isAllFieldsValid() -> Bool {
@@ -113,7 +123,7 @@ class SignUpViewController: UIViewController {
                     let db = Firestore.firestore()
                     let profile = Profile(key: result!.user.uid, firstName: firstName, lastName: lastName, email: email, phoneNumber: phone, userID: userID)
                     //add new user to firebase db with key as uid
-                    db.collection(Constants.FIRE_STORE_DB_PATH).document(result!.user.uid).setData(profile.convertToDict()) { (error) in
+                    db.collection(Constants.fireStoreDbUsers).document(result!.user.uid).setData(profile.convertToDict()) { (error) in
                         
                         if error != nil {
                             //print error
@@ -124,6 +134,13 @@ class SignUpViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    //UITextFieldDelegate Method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //When pressed on the return button in the keyboard, the keyboard is dismmised
+        textField.resignFirstResponder()
+        return true
     }
     
     func transitionToHomeScreen() {

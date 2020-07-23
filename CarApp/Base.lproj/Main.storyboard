@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="104" y="110"/>
         </scene>
-        <!--Log In View Controller-->
+        <!--Log In-->
         <scene sceneID="MbT-ci-qCf">
             <objects>
                 <viewController storyboardIdentifier="loginvc" id="D4o-rK-3c6" customClass="LogInViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -110,7 +110,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Koj-Df-Bzw"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SYf-CY-per"/>
+                    <navigationItem key="navigationItem" title="Log In" id="SYf-CY-per"/>
                     <connections>
                         <outlet property="emailTxt" destination="uzq-6e-4by" id="21s-ET-KDl"/>
                         <outlet property="errorLbl" destination="1ss-SP-5AD" id="a9H-bd-bZt"/>
@@ -129,11 +129,43 @@
                     <view key="view" contentMode="scaleToFill" id="pa7-7w-Cmb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="bLh-H4-vAr">
+                                <rect key="frame" x="40" y="238" width="334" height="160"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syw-4g-OEp">
+                                        <rect key="frame" x="119.5" y="0.0" width="95" height="30"/>
+                                        <state key="normal" title="Scan barcode"/>
+                                        <connections>
+                                            <action selector="scanPressed:" destination="rH7-yt-RJB" eventType="touchUpInside" id="kE9-15-7Ho"/>
+                                            <segue destination="Nm3-Oc-X0E" kind="show" identifier="barcodeDetailsVc" id="Rdy-Hr-JUL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bog-HX-X1t">
+                                        <rect key="frame" x="146.5" y="130" width="41" height="30"/>
+                                        <state key="normal" title="Demo"/>
+                                        <connections>
+                                            <action selector="demoPressed:" destination="rH7-yt-RJB" eventType="touchUpInside" id="Wps-cS-9dN"/>
+                                            <segue destination="Nm3-Oc-X0E" kind="show" identifier="demoDetailsVc" id="naa-jp-j7b"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="42W-aD-y81" firstAttribute="trailing" secondItem="bLh-H4-vAr" secondAttribute="trailing" constant="40" id="jTo-QW-LQ6"/>
+                            <constraint firstItem="bLh-H4-vAr" firstAttribute="top" secondItem="42W-aD-y81" secondAttribute="top" constant="150" id="mym-LH-8UR"/>
+                            <constraint firstItem="bLh-H4-vAr" firstAttribute="leading" secondItem="42W-aD-y81" secondAttribute="leading" constant="40" id="vwi-QT-22g"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="42W-aD-y81"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Scan QR" image="scanner" id="5rY-ny-aiC"/>
                     <navigationItem key="navigationItem" title="Scan Barcode" id="QD2-XD-hAq"/>
+                    <connections>
+                        <outlet property="demoBtn" destination="bog-HX-X1t" id="d5q-Ws-tQo"/>
+                        <outlet property="scanBtn" destination="syw-4g-OEp" id="CFL-YB-XRr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsn-Xs-9GM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -284,13 +316,22 @@
                                     <action selector="signUpPressed:" destination="1LV-gt-dVI" eventType="touchUpInside" id="Ymf-LJ-OgC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8B-ES-Ee3">
+                                <rect key="frame" x="20" y="701" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="04p-XG-t8C" firstAttribute="leading" secondItem="Vt6-aQ-LlO" secondAttribute="leading" constant="30" id="0qS-Ym-WfL"/>
                             <constraint firstItem="dMa-62-pHO" firstAttribute="leading" secondItem="Vt6-aQ-LlO" secondAttribute="leading" constant="40" id="5PR-hW-sEN"/>
+                            <constraint firstItem="W8B-ES-Ee3" firstAttribute="leading" secondItem="Vt6-aQ-LlO" secondAttribute="leading" constant="20" id="7Ya-Rp-yJE"/>
+                            <constraint firstItem="W8B-ES-Ee3" firstAttribute="top" secondItem="04p-XG-t8C" secondAttribute="bottom" constant="20" id="85s-IG-2Bs"/>
                             <constraint firstItem="Vt6-aQ-LlO" firstAttribute="trailing" secondItem="dMa-62-pHO" secondAttribute="trailing" constant="40" id="8qu-GI-My8"/>
                             <constraint firstItem="04p-XG-t8C" firstAttribute="centerX" secondItem="OQ6-3d-Nym" secondAttribute="centerX" id="JyK-oq-WgP"/>
+                            <constraint firstItem="Vt6-aQ-LlO" firstAttribute="trailing" secondItem="W8B-ES-Ee3" secondAttribute="trailing" constant="20" id="Nfu-7b-Dz3"/>
                             <constraint firstItem="dMa-62-pHO" firstAttribute="top" secondItem="Vt6-aQ-LlO" secondAttribute="top" constant="40" id="UkF-nr-NMX"/>
                             <constraint firstItem="04p-XG-t8C" firstAttribute="top" secondItem="dMa-62-pHO" secondAttribute="bottom" constant="30" id="coV-Jp-zJU"/>
                         </constraints>
@@ -300,6 +341,7 @@
                     <connections>
                         <outlet property="emailErrorLbl" destination="gRj-FH-jDJ" id="EK1-8y-qMp"/>
                         <outlet property="emailTxt" destination="jkg-3I-umP" id="lIS-7K-WE2"/>
+                        <outlet property="errorLbl" destination="W8B-ES-Ee3" id="ank-N9-tv9"/>
                         <outlet property="firstNameErrorLbl" destination="7sR-OD-bkK" id="m2z-Gl-L1d"/>
                         <outlet property="firstNameTxt" destination="bpM-LL-h70" id="07Q-ff-7vo"/>
                         <outlet property="lastNameErrorLbl" destination="1sk-rB-wKS" id="x3e-la-q3n"/>
@@ -317,7 +359,7 @@
             </objects>
             <point key="canvasLocation" x="-242" y="840"/>
         </scene>
-        <!--Accident History View Controller-->
+        <!--Accidents History-->
         <scene sceneID="nIw-A3-xTI">
             <objects>
                 <viewController id="bar-9t-NkP" customClass="AccidentHistoryViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -394,7 +436,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P6H-0g-VOu"/>
                     </view>
-                    <navigationItem key="navigationItem" id="oKY-St-Dna"/>
+                    <navigationItem key="navigationItem" title="Accidents History" id="oKY-St-Dna"/>
                     <connections>
                         <outlet property="accidentsTableView" destination="c4G-jX-8JX" id="nIE-pC-haU"/>
                     </connections>
@@ -403,7 +445,7 @@
             </objects>
             <point key="canvasLocation" x="1377" y="1617"/>
         </scene>
-        <!--Accident Info View Controller-->
+        <!--Accident Info-->
         <scene sceneID="w0q-o8-urQ">
             <objects>
                 <viewController id="Nm3-Oc-X0E" customClass="AccidentInfoViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -448,7 +490,7 @@
                                         <rect key="frame" x="0.0" y="202" width="134" height="30"/>
                                         <state key="normal" title="Other Driver details"/>
                                         <connections>
-                                            <segue destination="2VN-h3-2BY" kind="show" id="AdJ-A0-EHt"/>
+                                            <segue destination="2VN-h3-2BY" kind="show" identifier="otherDriverVc" id="AdJ-A0-EHt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -465,15 +507,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="3vz-9B-MaZ"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zU1-J5-HZW">
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zU1-J5-HZW">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="OXH-Rn-VRB">
-                                        <rect key="frame" x="0.0" y="11" width="128" height="128"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="OXH-Rn-VRB" customClass="ImageCollectionViewCell" customModule="CarApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IcV-V4-0i3">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -483,47 +525,24 @@
                                                     <rect key="frame" x="-56" y="0.0" width="240" height="128"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAj-41-JRk" userLabel="deleteBtn">
-                                                    <rect key="frame" x="98.5" y="5" width="19.5" height="22"/>
-                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <state key="normal" image="trash" catalog="system"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhj-kA-dqs" userLabel="editBtn">
-                                                    <rect key="frame" x="69" y="5" width="17.5" height="22"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" image="pencil" catalog="system"/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Dhj-kA-dqs" firstAttribute="top" secondItem="IcV-V4-0i3" secondAttribute="top" constant="5" id="6bG-Hw-Ihq"/>
-                                                <constraint firstItem="Dhj-kA-dqs" firstAttribute="width" secondItem="PAj-41-JRk" secondAttribute="width" multiplier="0.897436" id="P45-Xv-AAu"/>
-                                                <constraint firstItem="Dhj-kA-dqs" firstAttribute="height" secondItem="PAj-41-JRk" secondAttribute="height" id="TrO-XS-jjp"/>
-                                                <constraint firstItem="PAj-41-JRk" firstAttribute="leading" secondItem="Dhj-kA-dqs" secondAttribute="trailing" constant="12" id="d5t-VO-TkC"/>
-                                                <constraint firstItem="PAj-41-JRk" firstAttribute="top" secondItem="IcV-V4-0i3" secondAttribute="top" constant="5" id="htB-Mz-DP2"/>
-                                                <constraint firstAttribute="trailing" secondItem="PAj-41-JRk" secondAttribute="trailing" constant="10" id="t3Z-RJ-0mw"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TDk-Le-bsU">
-                                        <rect key="frame" x="138" y="11" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JnP-5C-Qzs">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hjz-kv-vSg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" backgroundImage="plus" catalog="system">
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
-                                                    </state>
-                                                </button>
                                             </subviews>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="zM4-ZU-QIF" id="U2W-pr-qgF"/>
+                                            <segue destination="xBD-da-dLF" kind="show" identifier="infoToDetailImgVc" id="IrL-8m-e0F"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QA4-Pq-CZ6">
+                                <rect key="frame" x="170" y="735" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Image"/>
+                                <connections>
+                                    <action selector="addImagePressed:" destination="Nm3-Oc-X0E" eventType="touchUpInside" id="zEZ-nf-wsm"/>
+                                    <segue destination="xBD-da-dLF" kind="show" identifier="infoToAddVc" id="ggA-oB-u20"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -542,8 +561,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CEy-0j-r6n"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1Ui-mc-Hey"/>
+                    <navigationItem key="navigationItem" title="Accident Info" id="1Ui-mc-Hey"/>
                     <connections>
+                        <outlet property="addImageBtn" destination="QA4-Pq-CZ6" id="Eyc-5B-Ks7"/>
                         <outlet property="dateLbl" destination="c7o-6m-BdA" id="B3v-T1-1IB"/>
                         <outlet property="imagesCollection" destination="m03-6q-RHp" id="fPL-Na-BGS"/>
                         <outlet property="locationLbl" destination="FJR-tA-uLN" id="4gQ-ko-PSN"/>
@@ -554,17 +574,290 @@
             </objects>
             <point key="canvasLocation" x="2271" y="1617"/>
         </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
+        <scene sceneID="Put-MA-MIC">
+            <objects>
+                <viewController id="xBD-da-dLF" customClass="ImageViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aRN-tG-KsW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q5R-AJ-e9F">
+                                <rect key="frame" x="0.0" y="88" width="414" height="615"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyd-6P-L6t">
+                                <rect key="frame" x="40" y="743" width="334" height="30"/>
+                                <state key="normal" title="Save Image"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wyd-6P-L6t" firstAttribute="top" secondItem="Q5R-AJ-e9F" secondAttribute="bottom" constant="40" id="5Yx-Mc-5Lc"/>
+                            <constraint firstItem="wyd-6P-L6t" firstAttribute="leading" secondItem="CgJ-ir-abt" secondAttribute="leading" constant="40" id="7Gr-ze-ANK"/>
+                            <constraint firstItem="CgJ-ir-abt" firstAttribute="trailing" secondItem="wyd-6P-L6t" secondAttribute="trailing" constant="40" id="7PX-xu-aiH"/>
+                            <constraint firstItem="Q5R-AJ-e9F" firstAttribute="top" secondItem="CgJ-ir-abt" secondAttribute="top" id="7iW-Wj-P82"/>
+                            <constraint firstItem="CgJ-ir-abt" firstAttribute="trailing" secondItem="Q5R-AJ-e9F" secondAttribute="trailing" id="ScD-fB-uFv"/>
+                            <constraint firstItem="Q5R-AJ-e9F" firstAttribute="leading" secondItem="CgJ-ir-abt" secondAttribute="leading" id="Ygm-Gy-ngF"/>
+                            <constraint firstItem="CgJ-ir-abt" firstAttribute="bottom" secondItem="wyd-6P-L6t" secondAttribute="bottom" constant="40" id="o2m-1L-qP6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CgJ-ir-abt"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZII-N3-ttp"/>
+                    <connections>
+                        <outlet property="imageView" destination="Q5R-AJ-e9F" id="5jz-E8-UfU"/>
+                        <outlet property="saveBtn" destination="wyd-6P-L6t" id="54K-ro-dL3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yQ2-RV-iS1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2270" y="2331"/>
+        </scene>
+        <!--Other Driver Profile-->
         <scene sceneID="Bp3-W3-AXs">
             <objects>
-                <viewController id="2VN-h3-2BY" sceneMemberID="viewController">
+                <viewController id="2VN-h3-2BY" customClass="OtherDriverInfoViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG4-b5-6Gt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hS3-Yf-yQc">
+                                <rect key="frame" x="0.0" y="63" width="414" height="769"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bl0-Sy-YvG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blank_profile" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-Rk-r5R">
+                                                <rect key="frame" x="127" y="20" width="160" height="160"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="160" id="4GW-PC-oBL"/>
+                                                    <constraint firstAttribute="width" constant="160" id="UAm-Vm-1Yf"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0az-oq-Fsl">
+                                                <rect key="frame" x="20" y="200" width="374" height="28.5"/>
+                                                <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1m2-Pk-kyj" userLabel="Fields Stack View">
+                                                <rect key="frame" x="12" y="248.5" width="338.5" height="1337.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u56-wg-cXP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="189" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Addresss" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGk-nj-OXy">
+                                                        <rect key="frame" x="0.0" y="48.5" width="129" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHJ-6y-dlj">
+                                                        <rect key="frame" x="0.0" y="90.5" width="192.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jdd-b4-ula">
+                                                        <rect key="frame" x="0.0" y="139" width="125" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOVERNMENT ID NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmZ-zG-2YH">
+                                                        <rect key="frame" x="0.0" y="181" width="305.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Government ID number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQq-26-VLI">
+                                                        <rect key="frame" x="0.0" y="229.5" width="195" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekm-nC-tf8">
+                                                        <rect key="frame" x="0.0" y="271.5" width="158" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iHj-uu-Lg6">
+                                                        <rect key="frame" x="0.0" y="320" width="101" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR MODEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6M-fa-Zzy">
+                                                        <rect key="frame" x="0.0" y="362" width="137.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Model" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zu0-LN-dG0">
+                                                        <rect key="frame" x="0.0" y="410.5" width="84" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAR COLOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmO-lx-4fZ">
+                                                        <rect key="frame" x="0.0" y="452.5" width="135" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Car Color" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nx7-7h-wik">
+                                                        <rect key="frame" x="0.0" y="501" width="78" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRIVER NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Nw-Zh-g0s">
+                                                        <rect key="frame" x="0.0" y="543" width="162" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Driver Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qTo-Yk-jtN">
+                                                        <rect key="frame" x="0.0" y="591.5" width="104" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgA-mM-591">
+                                                        <rect key="frame" x="0.0" y="633.5" width="111.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f0F-L6-5X9">
+                                                        <rect key="frame" x="0.0" y="682" width="69" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LICENCE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T2-hE-YC4">
+                                                        <rect key="frame" x="0.0" y="724" width="210" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Licence Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="09T-v0-HFk">
+                                                        <rect key="frame" x="0.0" y="772.5" width="137" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OWNER ADDRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuQ-KE-uBm">
+                                                        <rect key="frame" x="0.0" y="814.5" width="205.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Owner Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IdO-SY-gkZ">
+                                                        <rect key="frame" x="0.0" y="863" width="127" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OWNER PHONE NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYP-5Q-fdh">
+                                                        <rect key="frame" x="0.0" y="905" width="286.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Owner Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jSQ-IB-9ZG">
+                                                        <rect key="frame" x="0.0" y="953.5" width="183" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE COMPANY NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Q-w9-8DX">
+                                                        <rect key="frame" x="0.0" y="995.5" width="338.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Company Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hos-Ku-7H2">
+                                                        <rect key="frame" x="0.0" y="1044" width="221" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE POLICY NUMBER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMI-Y6-ikm">
+                                                        <rect key="frame" x="0.0" y="1086" width="338" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Policy Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fpq-mN-XBb">
+                                                        <rect key="frame" x="0.0" y="1134.5" width="210.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE AGENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymL-dK-S7k">
+                                                        <rect key="frame" x="0.0" y="1176.5" width="299.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Agent Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MNI-1f-N0x">
+                                                        <rect key="frame" x="0.0" y="1225" width="190.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INSURANCE AGENT PHONE " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E80-ed-mAg">
+                                                        <rect key="frame" x="0.0" y="1267" width="319.5" height="28.5"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Insurance Agent Phone Number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SAX-Yg-azH">
+                                                        <rect key="frame" x="0.0" y="1315.5" width="266.5" height="22"/>
+                                                        <fontDescription key="fontDescription" name="Galvji" family="Galvji" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="0az-oq-Fsl" firstAttribute="top" secondItem="zaF-Rk-r5R" secondAttribute="bottom" constant="20" id="05J-gN-6ZN"/>
+                                            <constraint firstAttribute="height" constant="2000" id="3o6-ft-tUk"/>
+                                            <constraint firstItem="zaF-Rk-r5R" firstAttribute="top" secondItem="Bl0-Sy-YvG" secondAttribute="top" constant="20" id="5KM-jh-0KV"/>
+                                            <constraint firstItem="0az-oq-Fsl" firstAttribute="leading" secondItem="Bl0-Sy-YvG" secondAttribute="leading" constant="20" id="BiX-Sm-fru"/>
+                                            <constraint firstItem="0az-oq-Fsl" firstAttribute="centerX" secondItem="Bl0-Sy-YvG" secondAttribute="centerX" id="Ey6-Zf-vth"/>
+                                            <constraint firstItem="zaF-Rk-r5R" firstAttribute="centerX" secondItem="Bl0-Sy-YvG" secondAttribute="centerX" id="GKE-gU-OFT"/>
+                                            <constraint firstItem="1m2-Pk-kyj" firstAttribute="leading" secondItem="Bl0-Sy-YvG" secondAttribute="leading" constant="12" id="dxQ-bY-ob1"/>
+                                            <constraint firstItem="1m2-Pk-kyj" firstAttribute="top" secondItem="0az-oq-Fsl" secondAttribute="bottom" constant="20" id="hef-KY-Sf4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Bl0-Sy-YvG" firstAttribute="leading" secondItem="rAW-bH-Qx3" secondAttribute="leading" id="Bal-IY-7gT"/>
+                                    <constraint firstItem="Bl0-Sy-YvG" firstAttribute="trailing" secondItem="rAW-bH-Qx3" secondAttribute="trailing" id="bD5-yC-QR6"/>
+                                    <constraint firstItem="Bl0-Sy-YvG" firstAttribute="bottom" secondItem="rAW-bH-Qx3" secondAttribute="bottom" id="wbp-wn-jDy"/>
+                                    <constraint firstItem="Bl0-Sy-YvG" firstAttribute="width" secondItem="t3a-8D-axV" secondAttribute="width" id="y5P-XG-lvy"/>
+                                    <constraint firstItem="Bl0-Sy-YvG" firstAttribute="top" secondItem="rAW-bH-Qx3" secondAttribute="top" id="zyZ-Uh-zWK"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="rAW-bH-Qx3"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="t3a-8D-axV"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="ipx-fy-RYQ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yCf-YL-X1x"/>
+                    <navigationItem key="navigationItem" title="Other Driver Profile" id="yCf-YL-X1x"/>
+                    <connections>
+                        <outlet property="addressTextField" destination="f0F-L6-5X9" id="opV-na-qyF"/>
+                        <outlet property="carColorTextField" destination="nx7-7h-wik" id="SOD-YU-2Ci"/>
+                        <outlet property="carModelTextField" destination="Zu0-LN-dG0" id="5PO-XP-LeI"/>
+                        <outlet property="carNumberTextField" destination="iHj-uu-Lg6" id="vIE-Jm-eRK"/>
+                        <outlet property="driverNameTextField" destination="qTo-Yk-jtN" id="Why-yh-OPa"/>
+                        <outlet property="emailTextField" destination="pGk-nj-OXy" id="Rq8-GO-GpS"/>
+                        <outlet property="fullNameLabel" destination="0az-oq-Fsl" id="k4K-C4-0mU"/>
+                        <outlet property="govIDNumTextField" destination="lQq-26-VLI" id="DRi-mg-2yB"/>
+                        <outlet property="insuranceAgentNameTextField" destination="MNI-1f-N0x" id="zyD-Af-9AN"/>
+                        <outlet property="insuranceAgentPhoneNumberTextField" destination="SAX-Yg-azH" id="em6-pz-REI"/>
+                        <outlet property="insuranceCompanyNameTextField" destination="hos-Ku-7H2" id="bZO-CD-vd5"/>
+                        <outlet property="insurancePolicyNumberTextFeild" destination="fpq-mN-XBb" id="SLT-Wx-6hJ"/>
+                        <outlet property="licenceNumberTextField" destination="09T-v0-HFk" id="JJR-FH-Dj5"/>
+                        <outlet property="ownerAddressTextField" destination="IdO-SY-gkZ" id="O0g-eT-KYa"/>
+                        <outlet property="ownerPhoneNumberTextField" destination="jSQ-IB-9ZG" id="ETk-pm-e4x"/>
+                        <outlet property="phoneNumberTextField" destination="jdd-b4-ula" id="Bro-3l-3Ev"/>
+                        <outlet property="profileImage" destination="zaF-Rk-r5R" id="SL9-10-sUW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRR-ha-fLo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1322,7 +1615,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="O6s-3t-QNS"/>
-        <segue reference="LVa-Uu-MMZ"/>
+        <segue reference="ggA-oB-u20"/>
+        <segue reference="Vgf-if-igk"/>
+        <segue reference="g20-uw-sLa"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icon-Small" width="29" height="29"/>
@@ -1331,10 +1626,7 @@
         <image name="history" width="29" height="29"/>
         <image name="home" width="29" height="29"/>
         <image name="logOut" width="29" height="29"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="profile_icon" width="29" height="29"/>
         <image name="scanner" width="29" height="29"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
     </resources>
 </document>

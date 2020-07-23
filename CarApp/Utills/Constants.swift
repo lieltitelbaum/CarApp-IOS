@@ -8,14 +8,22 @@
 
 import Foundation
 
-class Constants{
-    static let FIRE_STORE_DB_PATH = "users"
+class Constants {
+    static let fireStoreDbUsers = "users"
     static let homeViewController = "homeVC"
     static let loginRegisterViewController = "loginRegVC"
     static let scanViewController = "scanVC"
     static let firebaseStorageRefUrl = "gs://car-app-ios.appspot.com"
     static let moveToAccidentInfoVc = "detailsVC"
-    
+    static let fireStoreDbAccident = "accidents"
+    static let fireStoreDbImagesAccident = "accidentImages"
+    static let accidentDetailsFromScanBtn = "barcodeDetailsVc"
+    static let accidentDetailsFromDemoBtn = "demoDetailsVc"
+    static let accidentImagesFireStorageRef = "accidents"
+    static let profileImageFireStorageRef = "profile"
+    static let accidentInfoToAddImageVc = "infoToAddVc"
+    static let accidentInfoToImageDetVc = "infoToDetailImgVc"
+    static let otherDriverInfoVc = "otherDriverVc"
 }
 
 class DictKeyConstants {
@@ -42,8 +50,12 @@ class DictKeyConstants {
     static let accidentKey:String = "accidentKey"
     static let accidentUser1:String = "user1"
     static let accidentUser2:String = "user2"
-    static let accidentLocation:String = "accidentLocation"
+    static let accidentLocationLat:String = "accidentLocationLat"
+    static let accidentLocationLong:String = "accidentLocationLong"
     static let accidentDate:String = "accidentDate"
     static let accidentPhotos:String = "photos"
+    
+    static let accidentImagesDbUploaded: String = "uploadTime"
+    static let accidentImagesUrl:String = "url"
 }
 

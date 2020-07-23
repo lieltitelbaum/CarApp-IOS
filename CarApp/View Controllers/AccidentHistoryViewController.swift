@@ -21,6 +21,12 @@ class AccidentHistoryViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    func convertDictTolist(){
+//        var dict:Dictionary<String, Any> = FirebaseFunctions.getAccidentsFromFirebase()
+//        for accidentKey in dict.keys {
+//            accidentsList.append(dict[accidentKey] as! Accident)
+//        }
+    }
     
     @IBAction func moreInfoTapped(_ sender: Any) {
         performSegue(withIdentifier: Constants.moveToAccidentInfoVc, sender: sender)
@@ -29,7 +35,7 @@ class AccidentHistoryViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constants.moveToAccidentInfoVc) {
             let vc = segue.destination as! AccidentInfoViewController
-            vc.accidentKey = accidentKey
+            vc.accidentKey = accidentKey!
         }
     }
 }
@@ -59,8 +65,8 @@ extension AccidentHistoryViewController : UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = self.accidentsTableView.dequeueReusableCell(withIdentifier: "AccidentRow", for: indexPath) as? AccidentHistoryTableViewCell
         
-        let lat = self.accidentsList[indexPath.row].accidentLocation.latitude
-        let longi = self.accidentsList[indexPath.row].accidentLocation.longitude
+        let lat = self.accidentsList[indexPath.row].accidentLocationLat
+        let longi = self.accidentsList[indexPath.row].accidentLocationLong
         let address = CLGeocoder.init()
         accidentKey = self.accidentsList[indexPath.row].accidentKey
         

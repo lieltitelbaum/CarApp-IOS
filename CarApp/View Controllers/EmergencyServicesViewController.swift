@@ -15,19 +15,24 @@ class EmergencyServicesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+    }
+    
+    func callNumber(number: String){
+        guard let number = URL(string: "tel://" + number) else { return }
+        UIApplication.shared.open(number)
     }
     
     @IBAction func callPoliceTapped(_ sender: Any) {
-        guard let number = URL(string: "tel://" + "100") else { return }
-           UIApplication.shared.open(number)
+        callNumber(number: "100")
     }
+    
     @IBAction func callMadaTapped(_ sender: Any) {
-        guard let number = URL(string: "tel://" + "101") else { return }
-           UIApplication.shared.open(number)
+        callNumber(number: "101")
     }
+    
     @IBAction func callFireTapped(_ sender: Any) {
-        guard let number = URL(string: "tel://" + "102") else { return }
-           UIApplication.shared.open(number)
+        callNumber(number: "102")
     }
+    
 }

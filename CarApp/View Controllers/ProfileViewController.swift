@@ -8,9 +8,10 @@
 
 import UIKit
 import FirebaseAuth
-//import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import AVFoundation
+import Photos
 
 class ProfileViewController: UIViewController {
     
@@ -62,12 +63,10 @@ class ProfileViewController: UIViewController {
     
     func hideSaveImageBtn () {
         saveImageBtn.isEnabled = false
-        saveImageBtn.isEnabled = false
         saveImageBtn.alpha = 0
     }
     
     func showSaveImageBtn () {
-        saveImageBtn.isEnabled = true
         saveImageBtn.isEnabled = true
         saveImageBtn.alpha = 1
     }
@@ -121,7 +120,7 @@ class ProfileViewController: UIViewController {
         //check if there is a current user connected and if so, return its uuid
         if Auth.auth().currentUser != nil {
             userUID = Auth.auth().currentUser!.uid
-            let firebasePath = db.collection(Constants.FIRE_STORE_DB_PATH).document(userUID)
+            let firebasePath = db.collection(Constants.fireStoreDbUsers).document(userUID)
             firebasePath.getDocument { (document, error) in
                 if let document = document, document.exists {
                     self.setTextFieldsTextByFirebaseValues(doc: document)
@@ -135,17 +134,41 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    func checkPermission() {
+        //check camera and library permission
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: // The user has previously granted access to the camera.
+            self.presentPicker()
+            
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    self.presentPicker()
+                }
+            }
+            
+        case .denied: // The user has previously denied access.
+            return
+            
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+        @unknown default:
+            return
+        }
+    }
+    
     func loadProfileImage(doc: DocumentSnapshot) {
         let imageUrl = doc.get(DictKeyConstants.profileProfileImage) as? String
         let url = URL(string: imageUrl!)
         
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            let data = try? Data(contentsOf: url!) 
             DispatchQueue.main.async {
                 self.profileImage.image = UIImage(data: data!)
             }
         }
     }
+    
     func setTextFieldsTextByFirebaseValues(doc: DocumentSnapshot) {
         firstNameTextField.text = doc.get(DictKeyConstants.profileFirstName) as? String
         lastNameTextField.text = doc.get(DictKeyConstants.profileLastName) as? String
@@ -174,22 +197,10 @@ class ProfileViewController: UIViewController {
         guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
             return
         }
-        let storageRef = Storage.storage().reference(forURL: Constants.firebaseStorageRefUrl)
-        let storageProfileRef = storageRef.child("profile").child(userUID)
         
-        let metaData = StorageMetadata()
-        metaData.contentType = "image/jpg"
-        storageProfileRef.putData(imageData, metadata: metaData) { (storageMeteData, error) in
-            if error != nil{
-                print(error!.localizedDescription)
-                return
-            }
-            storageProfileRef.downloadURL { (url, error) in
-                if let metaImageUrl = url?.absoluteString {
-                    FirebaseFunctions.updateValueInProfile(key: DictKeyConstants.profileProfileImage, val: metaImageUrl, userUID: self.userUID)
-                }
-            }
-        }
+        let profileUrl = FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.profileImageFireStorageRef , imageName: userUID, imageData: imageData)
+        
+        FirebaseFunctions.updateValueInProfile(key: DictKeyConstants.profileProfileImage, val: profileUrl, userUID: self.userUID)
     }
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
@@ -315,6 +326,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         let photoLibraryAction = UIAlertAction(title: "Choose from Library", style: .default) { (action) in
             self.showImagePickerController(sourceType: .photoLibrary)
+            
+            PHPhotoLibrary.requestAuthorization { status in
+                guard status == .authorized else { return }
+            }
         }
         let cameraAction = UIAlertAction(title: "Take from Camera", style: .default) { (action) in
             self.showImagePickerController(sourceType: .camera)
@@ -324,7 +339,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         alertController.addAction(photoLibraryAction)
         alertController.addAction(cameraAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func showImagePickerController(sourceType: UIImagePickerController.SourceType) {
