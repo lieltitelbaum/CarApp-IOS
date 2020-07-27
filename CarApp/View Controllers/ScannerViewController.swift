@@ -23,9 +23,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private var isUpdatingLocation: Bool = false
     private var lastLocationError: Error?
     private var isPermission: Bool = false
+    private var didGetLocation: Bool = false
+    var locationLat:Double = 0
+    var locationLong:Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isPermission = findLocation()
+        startLocationManager()
+        
+        UsefulMethods.makeBtnRound(button: demoBtn)
+        UsefulMethods.makeBtnRound(button: scanBtn)
     }
     
     func startScanning() {
@@ -69,21 +78,26 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
     
-    func createAccident(userID: String, segueId: String){
-        var locationLat:Double = 0
-        var locationLong:Double = 0
-        isPermission = findLocation()
-        startLocationManager()
-        if(isPermission){
+    func getCurrentLocation(userID: String) {
+        if(isPermission && didGetLocation){
             //if user granted location permission, get his location, if not set default location to 0,0
-            locationLat = location?.coordinate.latitude ?? 0
             locationLong = location?.coordinate.longitude ?? 0
+            locationLat = location?.coordinate.latitude ?? 0
+            print("Lat: \(locationLat)")
+            print("Long: \(locationLong)")
+            
+            createAccident(userID: userID)
         }
+    }
+    
+    func createAccident(userID: String){
+        let accidentUniqeKey = UUID().uuidString
         let user2 = FirebaseFunctions.getCurrentUserUId()
-        let accidentKey = userID + "." + user2 //create key that contains both users keys
+        accidentKey = accidentUniqeKey + "_ " + userID + "_" + user2 //create key that contains both users keys
+        print("My user uid: \(user2) other driver uid: \(userID)")
         FirebaseFunctions.createAccidentInFirestore(accident: Accident(accidentKey: accidentKey, user1Key: userID, user2Key: user2, accidentLocationLat: locationLat, accidentLocationLong: locationLong, accidentPhotosKey: accidentKey))
         
-        performSegue(withIdentifier: segueId, sender: Any.self)
+        self.performSegue(withIdentifier: Constants.accidentDetailsFromScanner, sender: self)
     }
     
     func startLocationManager() {
@@ -186,7 +200,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     func found(code: String) {
         //add accident to firebase
         print(code)
-        createAccident(userID: code, segueId: Constants.accidentDetailsFromScanBtn)
+        getCurrentLocation(userID: code)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -199,7 +213,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     @IBAction func demoPressed(_ sender: Any) {
         //create accident with user id- PnIIpfQEzmWvWtyobeDIMoApKa13 , name: liel titel
-        createAccident(userID: "PnIIpfQEzmWvWtyobeDIMoApKa13", segueId: Constants.accidentDetailsFromDemoBtn)
+        //        createAccident(userID: "PnIIpfQEzmWvWtyobeDIMoApKa13")
+        getCurrentLocation(userID: "PnIIpfQEzmWvWtyobeDIMoApKa13")
     }
     
     @IBAction func scanPressed(_ sender: Any) {
@@ -207,7 +222,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == Constants.accidentDetailsFromDemoBtn || segue.identifier == Constants.accidentDetailsFromScanBtn) {
+        if (segue.identifier == Constants.accidentDetailsFromScanner) {
             let vc = segue.destination as! AccidentInfoViewController
             vc.accidentKey = accidentKey
         }
@@ -229,7 +244,9 @@ extension ScannerViewController : CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         location = locations.last!
+        didGetLocation = true
         stopLocationManager()
+        
         print("GOT IT! locationManager-didUpdateLocation: \(String(describing: location))")
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class OtherDriverInfoViewController: UIViewController {
-
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -32,37 +32,45 @@ class OtherDriverInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setFields()
-//        UsefulMethods.makemakeProfilePictureRound(profileImage)
+        UsefulMethods.makePictureRound(image: profileImage)
     }
     
     private func setFields () {
-       let userDict = FirebaseFunctions.getUserInfo(userUID: userUID)
-        
-        let firstName = userDict[DictKeyConstants.profileFirstName] as! String
-        let lastName = userDict[DictKeyConstants.profileLastName] as! String
-        
-        fullNameLabel.text = "\(firstName) \(lastName)"
-        emailTextField.text = userDict[DictKeyConstants.profileEmail] as? String
-        phoneNumberTextField.text = userDict[DictKeyConstants.profilePhoneNumber] as? String
-        licenceNumberTextField.text = userDict[DictKeyConstants.profileLicenceNumber] as? String
-        ownerPhoneNumberTextField.text = userDict[DictKeyConstants.profileOwnerPhoneNumber] as? String
-        insurancePolicyNumberTextFeild.text = userDict[DictKeyConstants.profileInsurancePolicyNumber] as? String
-        insuranceCompanyNameTextField.text = userDict[DictKeyConstants.profileInsuranceCompanyName] as? String
-        addressTextField.text = userDict[DictKeyConstants.profileAddress] as? String
-        driverNameTextField.text = userDict[DictKeyConstants.profileDriverName] as? String
-        carColorTextField.text = userDict[DictKeyConstants.profileCarColor] as? String
-        carModelTextField.text = userDict[DictKeyConstants.profileCarModel] as? String
-        carNumberTextField.text = userDict[DictKeyConstants.profileCarNumber] as? String
-        govIDNumTextField.text = userDict[DictKeyConstants.profileUserID] as? String
-        insuranceAgentNameTextField.text = userDict[DictKeyConstants.profileInsuranceAgentName] as? String
-        insuranceAgentPhoneNumberTextField.text = userDict[DictKeyConstants.profileInsuranceAgentPhoneNum] as? String
-        ownerAddressTextField.text = userDict[DictKeyConstants.profileoOwnerAddress] as? String
-        //present profile image
-        let imageUrl = userDict[DictKeyConstants.profileProfileImage] as! String
-//        UsefulMethods.showProfileImageFromUrl(imageUrl: imageUrl, profileImage: profileImage)
-        
-        
+        //get other driver profile information
+        FirebaseFunctions.getUserInfo(userUID: userUID) { (dict) in
+            guard let userDict = dict else {
+                print("Other driver info is empty")
+                return
+            }
+            print("\n other driver info \(userDict)")
+            
+            let firstName = userDict[DictKeyConstants.profileFirstName] as! String
+            let lastName = userDict[DictKeyConstants.profileLastName] as! String
+            
+            //set fields with data
+            self.fullNameLabel.text = "\(firstName) \(lastName)"
+            self.emailTextField.text = userDict[DictKeyConstants.profileEmail] as? String
+            self.phoneNumberTextField.text = userDict[DictKeyConstants.profilePhoneNumber] as? String
+            self.licenceNumberTextField.text = userDict[DictKeyConstants.profileLicenceNumber] as? String
+            self.ownerPhoneNumberTextField.text = userDict[DictKeyConstants.profileOwnerPhoneNumber] as? String
+            self.insurancePolicyNumberTextFeild.text = userDict[DictKeyConstants.profileInsurancePolicyNumber] as? String
+            self.insuranceCompanyNameTextField.text = userDict[DictKeyConstants.profileInsuranceCompanyName] as? String
+            self.addressTextField.text = userDict[DictKeyConstants.profileAddress] as? String
+            self.driverNameTextField.text = userDict[DictKeyConstants.profileDriverName] as? String
+            self.carColorTextField.text = userDict[DictKeyConstants.profileCarColor] as? String
+            self.carModelTextField.text = userDict[DictKeyConstants.profileCarModel] as? String
+            self.carNumberTextField.text = userDict[DictKeyConstants.profileCarNumber] as? String
+            self.govIDNumTextField.text = userDict[DictKeyConstants.profileUserID] as? String
+            self.insuranceAgentNameTextField.text = userDict[DictKeyConstants.profileInsuranceAgentName] as? String
+            self.insuranceAgentPhoneNumberTextField.text = userDict[DictKeyConstants.profileInsuranceAgentPhoneNum] as? String
+            self.ownerAddressTextField.text = userDict[DictKeyConstants.profileoOwnerAddress] as? String
+            //present profile image
+            let imageUrl = userDict[DictKeyConstants.profileProfileImage] as? String ?? ""
+            print("other driver image Url: \(imageUrl)")
+            UsefulMethods.showProfileImageFromUrl(imageUrl: imageUrl, profileImage: self.profileImage)
+            
+        }
     }
 }

@@ -24,17 +24,21 @@ class AccidentInfoViewController: UIViewController {
     private var imageUpload: UIImage? = nil
     var accidentKey: String = ""
     private var accidentUser2Key: String = ""
+    var locationStr: String = "" 
     var isUserAddingImage: Bool = false
     var imagesUrlList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagesCollection.allowsMultipleSelection = false
+        //        imagesCollection.allowsMultipleSelection = false
+        UsefulMethods.makeBtnRound(button: addImageBtn)
+        UsefulMethods.makeBtnRound(button: otherDriverDetailsBtn)
         
+        print("Accident key: \(accidentKey)")
         loadAccidentDetails()
         setUpCollectionView()
-        setUpCollectionViewItemSize() 
+        setUpCollectionViewItemSize()
     }
     
     private func setUpCollectionView() {
@@ -64,39 +68,41 @@ class AccidentInfoViewController: UIViewController {
     }
     
     private func loadAccidentDetails() {
-        let loadedAccidentDict = FirebaseFunctions.getAccidentsFromFirebase(accidentKey: accidentKey)
-        let accident = Accident.convertDictToAccidentObj(dict: loadedAccidentDict)
-        dateLbl.text = accident.accidentDate
-        //        let address = CLGeocoder.init()
-        let currentUserKey:String = FirebaseFunctions.getCurrentUserUId()
-        if(currentUserKey.elementsEqual(accident.user1Key)) {
-            accidentUser2Key = accident.user2Key
-        }
-        else {
-            accidentUser2Key = accident.user1Key
-        }
-        
-        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: accident.accidentLocationLat, longitude: accident.accidentLocationLong), preferredLocale: nil) { (clPlacemark: [CLPlacemark]?, error: Error?) in
-            guard let place = clPlacemark?.first else {
-                print("No placemark from Apple: \(String(describing: error))")
-                return
+        FirebaseFunctions.getAccidentFromFirebaseByKey(accidentKey: accidentKey) { (dict) in
+            
+            if dict.isEmpty == false {
+                let accident = Accident.convertDictToAccidentObj(dict: dict)
+                
+                print("loaded dict accident")
+                //                       print(loadedAccidentDict)
+                print("accident date \(accident.accidentDate)")
+                self.dateLbl.text = accident.accidentDate
+                let currentUserKey:String = FirebaseFunctions.getCurrentUserUId()
+                if(currentUserKey == accident.user1Key) {
+                    self.accidentUser2Key = accident.user2Key
+                }
+                else {
+                    self.accidentUser2Key = accident.user1Key
+                }
+                
+                self.locationLbl.text = self.locationStr
+                self.loadImages(imagesKey: accident.accidentPhotosKey)
+                
             }
-            let postalAddressFormatter = CNPostalAddressFormatter()
-            postalAddressFormatter.style = .mailingAddress
-            if let postalAddress = place.postalAddress {
-                self.locationLbl.text = postalAddressFormatter.string(from: postalAddress)
-            }
         }
-        
-        loadImages(imagesKey: accident.accidentPhotosKey)
-        
-        
     }
     
     private func loadImages(imagesKey: String) {
-        let dict = FirebaseFunctions.getImagesForAccidentFirebase(imagesKey: imagesKey)
-        for key in dict.keys {
-            imagesUrlList.append(dict[key] as! String)
+        FirebaseFunctions.getImagesForAccidentFirebase(imagesKey: imagesKey) { (imagesDict) in
+            guard let imagesDict = imagesDict else {
+                print("Images dict is empty")
+                return
+            }
+            for key in imagesDict.keys {
+                if(key != "url") {
+                    self.imagesUrlList.append(imagesDict[key] as! String)
+                }
+            }
         }
     }
     
@@ -104,11 +110,13 @@ class AccidentInfoViewController: UIViewController {
         //check camera and library permission
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized: // The user has previously granted access to the camera.
+            print("in premission autorized")
             self.showImagePickerControllerChooseSource()
             
         case .notDetermined: // The user has not yet been asked for camera access.
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 if granted {
+                    print("in premission requestAccess")
                     self.showImagePickerControllerChooseSource()
                 }
             }
@@ -128,10 +136,10 @@ class AccidentInfoViewController: UIViewController {
     }
     
     @IBAction func addImagePressed(_ sender: Any) {
-        showImagePickerControllerChooseSource()
+        checkPermission()
         isUserAddingImage = true
         
-        imagesCollection.reloadData()
+        //        imagesCollection.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -187,10 +195,10 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
         return 1
     }
     
-    public func delete(indexPaths: [IndexPath]) {
-        imagesCollection.deleteItems(at: indexPaths)
-        imagesCollection.reloadData()
-    }
+    //    public func delete(indexPaths: [IndexPath]) {
+    //        imagesCollection.deleteItems(at: indexPaths)
+    //        imagesCollection.reloadData()
+    //    }
 }
 
 extension AccidentInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -232,6 +240,7 @@ extension AccidentInfoViewController: UIImagePickerControllerDelegate, UINavigat
             imageUpload = originalImage
         }
         dismiss(animated: true, completion: nil)
+        print("In accident info vc...")
         performSegue(withIdentifier: Constants.accidentInfoToAddImageVc, sender: addImageBtn)
     }
 }

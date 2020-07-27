@@ -20,7 +20,10 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userUID = getCurrentuser()
+        UsefulMethods.makeBtnRound(button: emergencyBtn)
+        UsefulMethods.makeBtnRound(button: scanBarcodeBtn)
+        
+        let userUID = FirebaseFunctions.getCurrentUserUId()
         if userUID != "" {
             getUserNameAndPresentIt(userUID: userUID)
             qrCodeImage.image = generateQRCode(from: userUID)
@@ -34,25 +37,19 @@ class HomeViewController: UIViewController {
     
     func getUserNameAndPresentIt(userUID: String) {
         //retrive user first and last name and show it in the welcome label
-        let firebasePath = db.collection(Constants.fireStoreDbUsers).document(userUID)
-        firebasePath.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let firstName = document.get("firstName")
-                let lastName = document.get("lastName")
-                self.welcomeLabel.text = "Welcome \(firstName!) \(lastName!)"
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-            } else {
-                print("Document does not exist")
+        
+        var firstName: String = ""
+        var lastName: String = ""
+        FirebaseFunctions.getUserInfo(userUID: userUID, callBack: { (userDict) in
+            guard let userDict = userDict else {
+                print("current logged user dict is empty")
+                return
             }
-        }
-    }
-    func getCurrentuser() -> String {
-        //check if there is a current user connected and if so, return its uuid
-        if Auth.auth().currentUser != nil {
-            return Auth.auth().currentUser!.uid
-        }
-        return "" //if there is no current user connected
+            firstName = userDict[DictKeyConstants.profileFirstName] as! String
+            lastName = userDict[DictKeyConstants.profileLastName] as! String
+            print("---")
+            self.welcomeLabel.text = "Welcome \(firstName) \(lastName)"
+        })
     }
     
     func generateQRCode(from string: String) -> UIImage? {
@@ -73,11 +70,11 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func scanbarcodeClicked(_ sender: Any) {
-//        let scanViewController = self.storyboard?.instantiateViewController(identifier: Constants.scanViewController) as? ScannerViewController
-//                             
-//                       self.navigationController?.pushViewController(scanViewController!, animated: false)
-//                       self.dismiss(animated: false, completion: nil)
-////        performSegue(withIdentifier: "scanCode", sender: self)
+        //        let scanViewController = self.storyboard?.instantiateViewController(identifier: Constants.scanViewController) as? ScannerViewController
+        //
+        //                       self.navigationController?.pushViewController(scanViewController!, animated: false)
+        //                       self.dismiss(animated: false, completion: nil)
+        ////        performSegue(withIdentifier: "scanCode", sender: self)
     }
     
     

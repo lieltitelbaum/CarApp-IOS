@@ -47,13 +47,13 @@ class Accident {
     }
     
     static func convertDictToAccidentObj(dict: Dictionary<String, Any>) -> Accident {
-        let accidentKey = dict[DictKeyConstants.accidentKey] as! String
-        let user1 = dict[DictKeyConstants.accidentUser1] as! String
-        let user2 = dict[DictKeyConstants.accidentUser2] as!String
-        let locationLat = dict[DictKeyConstants.accidentLocationLat] as! Double
-        let locationLong = dict[DictKeyConstants.accidentLocationLong] as! Double
-        let date = dict[DictKeyConstants.accidentDate] as! String
-        let photos = dict[DictKeyConstants.accidentPhotos] as! String
+        let accidentKey = dict[DictKeyConstants.accidentKey] as? String ?? ""
+        let user1 = dict[DictKeyConstants.accidentUser1] as? String ?? ""
+        let user2 = dict[DictKeyConstants.accidentUser2] as? String ?? ""
+        let locationLat = dict[DictKeyConstants.accidentLocationLat] as? Double ?? 0
+        let locationLong = dict[DictKeyConstants.accidentLocationLong] as? Double ?? 0
+        let date = dict[DictKeyConstants.accidentDate] as? String ?? ""
+        let photos = dict[DictKeyConstants.accidentPhotos] as? String ?? ""
        
         return Accident(accidentKey: accidentKey, user1Key: user1, user2Key: user2, accidentLocationLat: locationLat, accidentLocationLong: locationLong, accidentDate: date, accidentPhotosKey: photos)
     }

@@ -22,6 +22,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         emailTxt.delegate = self
         passwordTxt.delegate = self
         
+        UsefulMethods.makeBtnRound(button: logInBtn)
         errorLbl.alpha = 0//label is not shown
     }
     

@@ -10,11 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var logInBtn: UIButton!
+    @IBOutlet weak var signUpBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        UsefulMethods.makeBtnRound(button: logInBtn)
+        UsefulMethods.makeBtnRound(button: signUpBtn)
     }
-
-
 }
 

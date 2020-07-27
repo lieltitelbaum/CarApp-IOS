@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Contacts
 
 class AccidentHistoryViewController: UIViewController {
 
@@ -16,16 +17,27 @@ class AccidentHistoryViewController: UIViewController {
     var accidentKey: String? = ""
     
     var accidentsList = [Accident]()
+    var locationDesc:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    func convertDictTolist(){
-//        var dict:Dictionary<String, Any> = FirebaseFunctions.getAccidentsFromFirebase()
-//        for accidentKey in dict.keys {
-//            accidentsList.append(dict[accidentKey] as! Accident)
-//        }
+        
+        accidentsTableView.dataSource = self
+        accidentsTableView.delegate = self
+        
+        FirebaseFunctions.getAllAccidentsFromFirebase { (arr) in
+            if arr != nil {
+                for accident in arr! {
+                    print("accident key in list: \(accident.accidentKey)")
+                    self.accidentsList.append(accident)
+                }
+                self.accidentsTableView.reloadData()
+            }
+        }
+        for accident in accidentsList {
+            print(accident.accidentKey)
+        }
+        accidentsTableView.reloadData()
     }
     
     @IBAction func moreInfoTapped(_ sender: Any) {
@@ -36,6 +48,7 @@ class AccidentHistoryViewController: UIViewController {
         if (segue.identifier == Constants.moveToAccidentInfoVc) {
             let vc = segue.destination as! AccidentInfoViewController
             vc.accidentKey = accidentKey!
+            vc.locationStr = locationDesc
         }
     }
 }
@@ -63,25 +76,41 @@ extension AccidentHistoryViewController : UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //todo-> make identifier const
         var cell = self.accidentsTableView.dequeueReusableCell(withIdentifier: "AccidentRow", for: indexPath) as? AccidentHistoryTableViewCell
         
-        let lat = self.accidentsList[indexPath.row].accidentLocationLat
-        let longi = self.accidentsList[indexPath.row].accidentLocationLong
-        let address = CLGeocoder.init()
+        cell?.dateLabel.text = self.accidentsList[indexPath.row].accidentDate
+        
         accidentKey = self.accidentsList[indexPath.row].accidentKey
         
+        let accidentLat = self.accidentsList[indexPath.row].accidentLocationLat
+          let accidentLong = self.accidentsList[indexPath.row].accidentLocationLong
         
-        address.reverseGeocodeLocation(CLLocation.init(latitude: lat, longitude:longi)) { (places, error) in
-            if error == nil{
-                if let place = places{
-                    //here you can get all the info by combining that you can make address
-                }
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(CLLocation(latitude: accidentLat, longitude: accidentLong)) { (placemarks, error) in
+//            guard let self = self else{return}
+            if let _ = error {
+                return
             }
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            print("Getting location\n")
+            let streetNubmer = placemark.subThoroughfare ?? ""
+            print("street number \(streetNubmer)")
+            let streetName = placemark.thoroughfare ?? ""
+            print("street name \(streetName)")
+            let cityName = placemark.locality ?? ""
+            print("city name \(cityName)")
+            
+//            DispatchQueue.main.async {
+                self.locationDesc = "\(streetName) \(streetNubmer) ,\(cityName)"
+                cell?.locationLabel.text = self.locationDesc
+                print(self.locationDesc)
+//            }
+//            cell?.reloadInputViews()
+//            self.accidentsTableView.reloadData()
         }
-//        cell?.index_in_row.text = "\(indexPath.row + 1))"
-//        cell?.playerName.text = self.highScores[indexPath.row].playerName
-//        cell?.dateTime.text = self.highScores[indexPath.row].gameDate
-//        cell?.score.text = "\(self.highScores[indexPath.row].score)"
         
 //        createPinPointOnMap(location: self.highScores[indexPath.row].gameLocation, title: self.highScores[indexPath.row].gameDate)
 //

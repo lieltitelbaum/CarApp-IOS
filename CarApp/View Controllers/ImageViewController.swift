@@ -21,6 +21,8 @@ class ImageViewController: UIViewController {
         
         setupImageView()
         setUpSaveBtn()
+        print("Image vc: \n imageview \(String(describing: imageUpload ?? nil))")
+        print("accident key: \(accidentKey ?? "")")
     }
     private func setupImageView() {
         DispatchQueue.main.async {
@@ -41,19 +43,23 @@ class ImageViewController: UIViewController {
     
     @IBAction func saveImagePressed(_ sender: Any) {
         //if user pressed add image in the previous screen -> add the new image to firebase storage and after that add it to firestore by compatible accident id
-        if(didUserAddImage) {
+//        if(didUserAddImage) {
             guard let imageSelected = self.imageUpload else {
                 print("Image is nil")
                 return
             }
             
             guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
+                print("image data is empty")
                 return
             }
             //add image to firestorage and get its' url
-            let imageUrl = FirebaseFunctions.uploadImageToFirestorage( childNameInStoragePath: Constants.accidentImagesFireStorageRef, imageName: UUID().uuidString , imageData: imageData)
+        
+        FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.accidentImagesFireStorageRef, imageName: UUID().uuidString, imageData: imageData) { (urlString) in
+            print("\nimageUrl\(urlString)")
             //upload image to firestore
-            FirebaseFunctions.addImageToAccidentsFirestore(imagesAccidentKey: accidentKey, imageUrl: imageUrl)
+            FirebaseFunctions.addImageToAccidentsFirestore(imagesAccidentKey: self.accidentKey, imageUrl: urlString)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

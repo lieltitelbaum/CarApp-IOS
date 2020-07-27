@@ -17,6 +17,10 @@ import AVFoundation
 class FirebaseFunctions {
     
     static let db = Firestore.firestore()
+    typealias CompletionAccidentList = (_ accidents : [Accident]?) -> Void
+    typealias dict = Dictionary<String, Any>?
+    typealias CompletionProfileDict = (_ profileDict : Dictionary<String, Any> ) -> Void
+    typealias CompletionDictAccident = (_ accidentDict: Dictionary<String, Any>) -> Void
     
     static func isUserLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
@@ -30,23 +34,18 @@ class FirebaseFunctions {
         }
     }
     
-    static func logIn () {
-        
-    }
-    
     static func getCurrentUserUId() ->String {
         if isUserLoggedIn() {
             return Auth.auth().currentUser?.uid ?? ""
         }
         else {
-            logIn()
             return ""
         }
     }
     
     static func createEmptyAccidentsImagesInFirestore (accidentKey: String) {
         //create new images for this accidentKey, this function create the path and insert defult vaules at the first time the accident is created, until it will be edited.
-        let images = [DictKeyConstants.accidentImagesDbUploaded: "emptyUrl", DictKeyConstants.accidentImagesUrl : ""]//defult values until users will insert images from the accident
+        let images = [DictKeyConstants.accidentImagesUrl : "emptyURl"]//defult values until users will insert images from the accident
         
         db.collection(Constants.fireStoreDbImagesAccident).document(accidentKey).setData(images) { (error) in
             if error != nil {
@@ -66,52 +65,64 @@ class FirebaseFunctions {
         createEmptyAccidentsImagesInFirestore(accidentKey: accident.accidentKey)
     }
     
-    static func getAccidentsFromFirebase(accidentKey: String) -> Dictionary<String, Any> {
-        //        db.collection(Constants.fireStoreDbAccident).addSnapshotListener { (querySnapshot, error) in
-        //            guard let documents = querySnapshot?.documents else {
-        //                print("No documents")
-        //                return
-        //            }
-        //            var accidents = documents.map { (queryDocumentSnapshot) -> Accident in
-        //                let data = queryDocumentSnapshot.data()
-        //
-        //                let accidentDate =
-        //            }
-        //        }
-        var dict:Dictionary<String, Any> = [:]
+    static func getAccidentFromFirebaseByKey(accidentKey: String, callback: @escaping (_ dict: Dictionary< String, Any>) -> ()) {
+//        return dict
+         var dataDict :Dictionary<String, Any> = [:]
+//          let accidentRef = db.collection(Constants.fireStoreDbAccident)
+        let firebasePath = db.collection(Constants.fireStoreDbAccident).document(accidentKey)
+                      firebasePath.getDocument { (document, error) in
+                          if let document = document, document.exists {
+                            dataDict = document.data()!
+                            print("accident dic info \(dataDict)")
+//                              print("Document data: \(dataDict)")
+                            callback(dataDict)
+                          } else {
+                              print("Document does not exist")
+                          callback(dataDict)
+                          }
+                      }
+    }
+    
+    static func getAllAccidentsFromFirebase(callBack: @escaping CompletionAccidentList) {
+        //get accidents for current usre loged in
+        
+         var accidentsList = [Accident] ()
         db.collection(Constants.fireStoreDbAccident).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    dict.updateValue(document.data(), forKey: document.documentID)
-                    print("\(document.documentID) => \(document.data())")
+                    if(document.documentID.contains(getCurrentUserUId())) {
+                        print("\(document.documentID) => \(document.data())")
+                        accidentsList.append(Accident.convertDictToAccidentObj(dict: document.data()))
+                    }
+                    
                 }
+                callBack(accidentsList)
             }
-            
+         callBack(nil)
         }
-        return dict
     }
     
-    static func getImagesForAccidentFirebase(imagesKey: String) -> Dictionary<String, Any> {
-        let imagesRef = db.collection(Constants.fireStoreDbImagesAccident)
+    static func getImagesForAccidentFirebase(imagesKey: String, callBack: @escaping (_ dict: dict) -> ()) {
+        let imagesRef = db.collection(Constants.fireStoreDbImagesAccident).document(imagesKey)
         var dataDict :Dictionary<String, Any> = [:]
         
         if isUserLoggedIn() {
-            let firebasePath = imagesRef.document(imagesKey)
-            firebasePath.getDocument { (document, error) in
+            imagesRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     dataDict = document.data()!
+                    callBack(dataDict)
                     print("Document data: \(dataDict)")
                 } else {
                     print("Document does not exist")
+                    callBack(dataDict)
                 }
             }
         }
-        return dataDict
     }
     //
-    static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data) -> String{
+    static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data, callBack: @escaping (_ url : String) -> ()){
         //upload imagr to fireStorage and returns its' url
         var urlReturn :String = ""
         let storageRef = Storage.storage().reference(forURL: Constants.firebaseStorageRefUrl)
@@ -123,15 +134,17 @@ class FirebaseFunctions {
         storageImageRef.putData(imageData, metadata: metaData) { (storageMeteData, error) in
             if error != nil{
                 print(error!.localizedDescription)
-                return
+                callBack("")
             }
             storageImageRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
                     urlReturn = metaImageUrl
+                    callBack(urlReturn)
                 }
             }
         }
-        return urlReturn
+        print("url in firebase func: \(urlReturn)")
+       
     }
     
     static func updateValueInProfile(key: String, val: Any, userUID: String) {
@@ -150,7 +163,7 @@ class FirebaseFunctions {
         let accidentImages = db.collection(Constants.fireStoreDbImagesAccident)
         
         //set key and value to be image url
-        accidentImages.document(imagesAccidentKey).setData([ imageUrl : imageUrl]) { (error) in
+        accidentImages.document(imagesAccidentKey).setData([ UUID().uuidString : imageUrl]) { (error) in
             if error != nil {
                 //print error
                 print("Error creating new accident image path in firestore")
@@ -159,30 +172,23 @@ class FirebaseFunctions {
         }
     }
     
-    static func getUserInfo(userUID: String) -> Dictionary<String, Any> {
-        let usersRef = db.collection(Constants.fireStoreDbUsers)
+    static func getUserInfo(userUID: String, callBack: @escaping (_ dict: dict) -> ()) {
+        let usersRef = db.collection(Constants.fireStoreDbUsers).document(userUID)
         var dataDict :Dictionary<String, Any> = [:]
         
-        let firebasePath = usersRef.document(userUID)
-                firebasePath.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        dataDict = document.data()!
-                        print("Document data: \(dataDict)")
-                    } else {
-                        print("Document does not exist")
-                    }
-                }
-            return dataDict
-    }
-    
-    static func getProfileInfo() -> Dictionary <String, Any> {
-        var dataDict :Dictionary<String, Any> = [:]
-        
-        if isUserLoggedIn() {
-            let userUID = Auth.auth().currentUser!.uid
-            dataDict = getUserInfo(userUID: userUID)
+        usersRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+
+                dataDict = document.data()!
+                callBack(dataDict)
+
+                print("Data dict:: \(dataDict)")
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+                callBack(dataDict)
+            }
         }
-        return dataDict
     }
-    
 }

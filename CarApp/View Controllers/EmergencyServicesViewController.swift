@@ -16,6 +16,12 @@ class EmergencyServicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UsefulMethods.makeBtnRound(button: callFireBtn)
+        UsefulMethods.makeBtnRound(button: callMadaBtn)
+        UsefulMethods.makeBtnRound(button: callPoliceBtn)
+        UsefulMethods.makeRedBorderToBtn(button: callPoliceBtn)
+        UsefulMethods.makeRedBorderToBtn(button: callMadaBtn)
+        UsefulMethods.makeRedBorderToBtn(button: callFireBtn)
     }
     
     func callNumber(number: String){

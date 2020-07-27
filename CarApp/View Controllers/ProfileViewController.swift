@@ -45,13 +45,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        retriveUserProfileFromFirebase()
+        
         hideSaveImageBtn()
-        roundedBorderBtn()
+        //        roundedBorderBtn()
         disableTextFields()
         setImage()
         makeProfilePictureRound(image: profileImage)
-        retriveUserProfileFromFirebase()
-        
     }
     
     func roundedBorderBtn () {
@@ -109,7 +109,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func presentPicker(){
-        showImagePickerControllerChooseSource()
+        checkPermission()
     }
     
     func changeToDoneIcon(btn: UIButton) {
@@ -138,12 +138,12 @@ class ProfileViewController: UIViewController {
         //check camera and library permission
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized: // The user has previously granted access to the camera.
-            self.presentPicker()
+            self.showImagePickerControllerChooseSource()
             
         case .notDetermined: // The user has not yet been asked for camera access.
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 if granted {
-                    self.presentPicker()
+                    self.showImagePickerControllerChooseSource()
                 }
             }
             
@@ -158,15 +158,8 @@ class ProfileViewController: UIViewController {
     }
     
     func loadProfileImage(doc: DocumentSnapshot) {
-        let imageUrl = doc.get(DictKeyConstants.profileProfileImage) as? String
-        let url = URL(string: imageUrl!)
-        
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!) 
-            DispatchQueue.main.async {
-                self.profileImage.image = UIImage(data: data!)
-            }
-        }
+        let imageUrl = doc.get(DictKeyConstants.profileProfileImage) as? String ?? ""
+        UsefulMethods.showProfileImageFromUrl(imageUrl: imageUrl, profileImage: profileImage)
     }
     
     func setTextFieldsTextByFirebaseValues(doc: DocumentSnapshot) {
@@ -198,9 +191,13 @@ class ProfileViewController: UIViewController {
             return
         }
         
-        let profileUrl = FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.profileImageFireStorageRef , imageName: userUID, imageData: imageData)
+        FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.profileImageFireStorageRef, imageName: userUID, imageData: imageData) { (profileUrl) in
+            print("profile photo url:")
+            print(profileUrl)
+            FirebaseFunctions.updateValueInProfile(key: DictKeyConstants.profileProfileImage, val: profileUrl, userUID: self.userUID)
+        }
         
-        FirebaseFunctions.updateValueInProfile(key: DictKeyConstants.profileProfileImage, val: profileUrl, userUID: self.userUID)
+        
     }
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
@@ -349,6 +346,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         imagePickerController.sourceType = sourceType
         present(imagePickerController, animated: true, completion: nil)
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage] as? UIImage {
             imageUpload = editedImage

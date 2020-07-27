@@ -18,7 +18,7 @@ class Constants {
     static let fireStoreDbAccident = "accidents"
     static let fireStoreDbImagesAccident = "accidentImages"
     static let accidentDetailsFromScanBtn = "barcodeDetailsVc"
-    static let accidentDetailsFromDemoBtn = "demoDetailsVc"
+    static let accidentDetailsFromScanner = "demoDetailsVc"
     static let accidentImagesFireStorageRef = "accidents"
     static let profileImageFireStorageRef = "profile"
     static let accidentInfoToAddImageVc = "infoToAddVc"
@@ -27,6 +27,7 @@ class Constants {
 }
 
 class DictKeyConstants {
+    //Profile keys
     static let profileKeyId:String = "keyId"
     static let profileFirstName:String = "firstName"
     static let profileLastName:String = "lastName"
@@ -47,6 +48,7 @@ class DictKeyConstants {
     static let profileInsuranceAgentPhoneNum:String = "insuranceAgentPhoneNum"
     static let profileProfileImage:String = "profileImage"
     
+    //Accident keys
     static let accidentKey:String = "accidentKey"
     static let accidentUser1:String = "user1"
     static let accidentUser2:String = "user2"
@@ -55,6 +57,7 @@ class DictKeyConstants {
     static let accidentDate:String = "accidentDate"
     static let accidentPhotos:String = "photos"
     
+    //Accident Images keys
     static let accidentImagesDbUploaded: String = "uploadTime"
     static let accidentImagesUrl:String = "url"
 }
