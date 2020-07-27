@@ -159,7 +159,7 @@ class ProfileViewController: UIViewController {
     
     func loadProfileImage(doc: DocumentSnapshot) {
         let imageUrl = doc.get(DictKeyConstants.profileProfileImage) as? String ?? ""
-        UsefulMethods.showProfileImageFromUrl(imageUrl: imageUrl, profileImage: profileImage)
+        UsefulMethods.showImageFromUrl(imageUrl: imageUrl, profileImage: profileImage)
     }
     
     func setTextFieldsTextByFirebaseValues(doc: DocumentSnapshot) {

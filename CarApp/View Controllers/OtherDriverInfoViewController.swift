@@ -69,7 +69,7 @@ class OtherDriverInfoViewController: UIViewController {
             //present profile image
             let imageUrl = userDict[DictKeyConstants.profileProfileImage] as? String ?? ""
             print("other driver image Url: \(imageUrl)")
-            UsefulMethods.showProfileImageFromUrl(imageUrl: imageUrl, profileImage: self.profileImage)
+            UsefulMethods.showImageFromUrl(imageUrl: imageUrl, profileImage: self.profileImage)
             
         }
     }

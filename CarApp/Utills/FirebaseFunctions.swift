@@ -163,7 +163,7 @@ class FirebaseFunctions {
         let accidentImages = db.collection(Constants.fireStoreDbImagesAccident)
         
         //set key and value to be image url
-        accidentImages.document(imagesAccidentKey).setData([ UUID().uuidString : imageUrl]) { (error) in
+        accidentImages.document(imagesAccidentKey).setData([UUID().uuidString : imageUrl], merge: true) { (error) in
             if error != nil {
                 //print error
                 print("Error creating new accident image path in firestore")

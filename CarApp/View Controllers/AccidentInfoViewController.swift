@@ -24,20 +24,19 @@ class AccidentInfoViewController: UIViewController {
     private var imageUpload: UIImage? = nil
     var accidentKey: String = ""
     private var accidentUser2Key: String = ""
-    var locationStr: String = "" 
     var isUserAddingImage: Bool = false
     var imagesUrlList: [String] = []
-    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpCollectionView()
+        loadAccidentDetails()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        imagesCollection.allowsMultipleSelection = false
+        imagesCollection.allowsMultipleSelection = false
         UsefulMethods.makeBtnRound(button: addImageBtn)
         UsefulMethods.makeBtnRound(button: otherDriverDetailsBtn)
-        
         print("Accident key: \(accidentKey)")
-        loadAccidentDetails()
-        setUpCollectionView()
         setUpCollectionViewItemSize()
     }
     
@@ -47,6 +46,7 @@ class AccidentInfoViewController: UIViewController {
     }
     
     private func setUpCollectionViewItemSize() {
+        print("starting to set up collection view item size..")
         if(collectionViewFlowLayout == nil) {
             let numberOfItemsPerRow: CGFloat = 3
             let lineSpacing:CGFloat = 5
@@ -85,22 +85,27 @@ class AccidentInfoViewController: UIViewController {
                     self.accidentUser2Key = accident.user1Key
                 }
                 
-                self.locationLbl.text = self.locationStr
+                UsefulMethods.getAddressAsStringFromCord(long: accident.accidentLocationLong, lat: accident.accidentLocationLat) { (locationStr) in
+                    self.locationLbl.text = locationStr
+                }
                 self.loadImages(imagesKey: accident.accidentPhotosKey)
-                
             }
         }
     }
     
     private func loadImages(imagesKey: String) {
+        imagesUrlList.removeAll()
         FirebaseFunctions.getImagesForAccidentFirebase(imagesKey: imagesKey) { (imagesDict) in
             guard let imagesDict = imagesDict else {
                 print("Images dict is empty")
                 return
             }
+            print("Adding images...")
             for key in imagesDict.keys {
                 if(key != "url") {
                     self.imagesUrlList.append(imagesDict[key] as! String)
+                    self.imagesCollection.reloadData()
+                    print(self.imagesUrlList.count)
                 }
             }
         }
@@ -139,7 +144,7 @@ class AccidentInfoViewController: UIViewController {
         checkPermission()
         isUserAddingImage = true
         
-        //        imagesCollection.reloadData()
+//        imagesCollection.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -163,7 +168,7 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.imageCollectionViewCellID, for: indexPath) as! ImageCollectionViewCell
         cell.contentView.layer.cornerRadius = 10
         cell.contentView.layer.borderWidth = 1.0
         cell.contentView.layer.backgroundColor = UIColor.gray.cgColor
@@ -171,12 +176,8 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
         cell.layer.shadowColor = UIColor.darkGray.cgColor
         
         let url = URL(string: imagesUrlList[indexPath.row])
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                cell.imageView.image = UIImage(data: data!)
-            }
-        }
+        print("url in collection view\(String(describing: url))")
+        UsefulMethods.showImageFromUrl(imageUrl: imagesUrlList[indexPath.row], profileImage: cell.imageView)
         return cell
     }
     

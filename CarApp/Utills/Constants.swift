@@ -24,6 +24,9 @@ class Constants {
     static let accidentInfoToAddImageVc = "infoToAddVc"
     static let accidentInfoToImageDetVc = "infoToDetailImgVc"
     static let otherDriverInfoVc = "otherDriverVc"
+    static let userIdForDemoBtnScannerVC = "PnIIpfQEzmWvWtyobeDIMoApKa13"
+    static let accidentRowIdHistoryVC = "AccidentRow"
+    static let imageCollectionViewCellID = "ImageCollectionViewCell"
 }
 
 class DictKeyConstants {
