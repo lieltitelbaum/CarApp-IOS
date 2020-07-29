@@ -44,6 +44,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userUID = FirebaseFunctions.getCurrentUserUId()
         retriveUserProfileFromFirebase()
         
         hideSaveImageBtn()
@@ -119,7 +120,7 @@ class ProfileViewController: UIViewController {
     func retriveUserProfileFromFirebase() {
         //if user is logged in, retrive user info from firestore by userUID, and set fields by its' data
         if FirebaseFunctions.isUserLoggedIn() {
-            FirebaseFunctions.getUserInfo(userUID: FirebaseFunctions.getCurrentUserUId()) { (userDict) in
+            FirebaseFunctions.getUserInfo(userUID: userUID) { (userDict) in
                 guard let userDict = userDict else {
                     print("user dict didn't load..")
                     return
@@ -132,23 +133,31 @@ class ProfileViewController: UIViewController {
     
     func checkPermission() {
         //check camera and library permission
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: // The user has previously granted access to the camera.
-            self.showImagePickerControllerChooseSource()
-            
-        case .notDetermined: // The user has not yet been asked for camera access.
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    self.showImagePickerControllerChooseSource()
-                }
+        let photos = PHPhotoLibrary.authorizationStatus()
+        let camera = AVCaptureDevice.authorizationStatus(for: .video)
+        print("Camera and library permisssion..")
+        if camera == .authorized && photos == .authorized {
+            DispatchQueue.main.async {
+                print("authorized..")
+                self.showImagePickerControllerChooseSource()
             }
+        }
             
-        case .denied: // The user has previously denied access.
-            return
-            
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-        @unknown default:
+        else if camera == .notDetermined && photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    AVCaptureDevice.requestAccess(for: .video) { granted in
+                        if granted {
+                            DispatchQueue.main.async {
+                                print("granted..")
+                                self.showImagePickerControllerChooseSource()
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        else if camera == .restricted || camera == .denied || photos == .denied || photos == .restricted{
             return
         }
     }
@@ -194,8 +203,6 @@ class ProfileViewController: UIViewController {
             print(profileUrl)
             FirebaseFunctions.updateValueInProfile(key: DictKeyConstants.profileProfileImage, val: profileUrl, userUID: self.userUID)
         }
-        
-        
     }
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
@@ -316,11 +323,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         let photoLibraryAction = UIAlertAction(title: "Choose from Library", style: .default) { (action) in
             self.showImagePickerController(sourceType: .photoLibrary)
-            
-            PHPhotoLibrary.requestAuthorization { status in
-                guard status == .authorized else { return }
-            }
         }
+        
         let cameraAction = UIAlertAction(title: "Take from Camera", style: .default) { (action) in
             self.showImagePickerController(sourceType: .camera)
         }

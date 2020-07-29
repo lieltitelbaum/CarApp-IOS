@@ -123,21 +123,21 @@ class FirebaseFunctions {
     public static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data, callBack: @escaping (_ url : String) -> ()){
         //upload imagr to fireStorage and returns its' url
         var urlReturn :String = ""
-        let storageRef = Storage.storage().reference(forURL: Constants.firebaseStorageRefUrl)
-        let storageImageRef = storageRef.child(childNameInStoragePath).child(imageName)
+        let storageRef = Storage.storage().reference(forURL: Constants.firebaseStorageRefUrl).child(childNameInStoragePath).child(imageName)
         
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"
         
-        storageImageRef.putData(imageData, metadata: metaData) { (storageMeteData, error) in
+        storageRef.putData(imageData, metadata: metaData) { (storageMeteData, error) in
             if error != nil{
                 print(error!.localizedDescription)
-                callBack("")
+                callBack("empty")
             }
-            storageImageRef.downloadURL { (url, error) in
+            storageRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
                     urlReturn = metaImageUrl
-                    callBack(urlReturn)
+                    print("metaImageUrl \(metaImageUrl)")
+                    callBack(metaImageUrl)
                 }
             }
         }

@@ -32,6 +32,7 @@ class AccidentInfoViewController: UIViewController {
         setUpCollectionView()
         loadAccidentDetails()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,11 +80,10 @@ class AccidentInfoViewController: UIViewController {
             if dict.isEmpty == false {
                 let accident = Accident.convertDictToAccidentObj(dict: dict)
                 
-                print("loaded dict accident")
-                //                       print(loadedAccidentDict)
                 print("accident date \(accident.accidentDate)")
                 self.dateLbl.text = accident.accidentDate
                 let currentUserKey:String = FirebaseFunctions.getCurrentUserUId()
+                
                 if(currentUserKey == accident.user1Key) {
                     self.accidentUser2Key = accident.user2Key
                 }
@@ -120,40 +120,46 @@ class AccidentInfoViewController: UIViewController {
             
         }
         self.imagesAmount = self.imagesUrlList.count
-       
+        
     }
-
+    
     private func addUrlToList(imagesDict: Dictionary< String, Any>){
-    for key in imagesDict.keys {
-        if(key != "url") {
-            imagesUrlList.append(imagesDict[key] as! String)
-            imagesUrlList.sort(by: {$0 > $1})
-            print(imagesUrlList.count)
+        for key in imagesDict.keys {
+            if(key != "url") {
+                imagesUrlList.append(imagesDict[key] as! String)
+                imagesUrlList.sort(by: {$0 > $1})
+                print(imagesUrlList.count)
+            }
         }
     }
-}
-    
-    private func checkPermission() {
+    func checkPermission() {
         //check camera and library permission
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: // The user has previously granted access to the camera.
-            print("in premission autorized")
-            self.showImagePickerControllerChooseSource()
-            
-        case .notDetermined: // The user has not yet been asked for camera access.
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    print("in premission requestAccess")
-                    self.showImagePickerControllerChooseSource()
-                }
+        let photos = PHPhotoLibrary.authorizationStatus()
+        let camera = AVCaptureDevice.authorizationStatus(for: .video)
+        print("Camera and library permisssion..")
+        if camera == .authorized && photos == .authorized {
+            DispatchQueue.main.async {
+                print("authorized..")
+                self.showImagePickerControllerChooseSource()
             }
+        }
             
-        case .denied: // The user has previously denied access.
-            return
+        else if camera == .notDetermined && photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    AVCaptureDevice.requestAccess(for: .video) { granted in
+                        if granted {
+                            DispatchQueue.main.async {
+                                print("granted..")
+                                self.showImagePickerControllerChooseSource()
+                            }
+                        }
+                    }
+                }
+            })
             
-        case .restricted: // The user can't grant access due to restrictions.
-            return
-        @unknown default:
+        }
+        else if camera == .restricted || camera == .denied || photos == .denied || photos == .restricted{
             return
         }
     }
@@ -211,11 +217,6 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
-    //    public func delete(indexPaths: [IndexPath]) {
-    //        imagesCollection.deleteItems(at: indexPaths)
-    //        imagesCollection.reloadData()
-    //    }
 }
 
 extension AccidentInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

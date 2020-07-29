@@ -19,13 +19,16 @@ class AccidentHistoryViewController: UIViewController {
     var accidentsList = [Accident]()
     var locationDesc:String = ""
     
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         accidentsTableView.dataSource = self
         accidentsTableView.delegate = self
-        
-        getData()
     }
     
     private func getData() {

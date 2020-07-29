@@ -14,10 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+
         UITabBar.appearance().tintColor = .red
         UITabBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().tintColor = .red
-        FirebaseApp.configure()
         return true
     }
 
