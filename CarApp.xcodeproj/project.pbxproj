@@ -122,6 +122,7 @@
 			children = (
 				BB6B414B24B602FF007B58E4 /* Utills */,
 				BB6B414A24B602F0007B58E4 /* View Controllers */,
+				BBC831CB24D19E100078E0DA /* Table View Cell */,
 				BBA8F8AB24CA169E00F05334 /* Collection View Cell */,
 				BB6B414924B602BE007B58E4 /* Modules */,
 				BB6B413524B5FEA5007B58E4 /* AppDelegate.swift */,
@@ -140,7 +141,6 @@
 			children = (
 				BB5A345F24BA363900247F55 /* Profile.swift */,
 				BB5A346124BA364500247F55 /* Accident.swift */,
-				BBA8F89B24C2666300F05334 /* AccidentHistoryTableViewCell.swift */,
 				BBA8F8A124C35B3F00F05334 /* AccidentViewModel.swift */,
 			);
 			path = Modules;
@@ -181,6 +181,14 @@
 				BBA8F8A324C774B200F05334 /* ImageCollectionViewCell.swift */,
 			);
 			path = "Collection View Cell";
+			sourceTree = "<group>";
+		};
+		BBC831CB24D19E100078E0DA /* Table View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				BBA8F89B24C2666300F05334 /* AccidentHistoryTableViewCell.swift */,
+			);
+			path = "Table View Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

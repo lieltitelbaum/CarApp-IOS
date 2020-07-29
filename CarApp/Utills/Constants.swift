@@ -27,6 +27,10 @@ class Constants {
     static let userIdForDemoBtnScannerVC = "PnIIpfQEzmWvWtyobeDIMoApKa13"
     static let accidentRowIdHistoryVC = "AccidentRow"
     static let imageCollectionViewCellID = "ImageCollectionViewCell"
+    static let homeVcWithLoggedUser = "LoggedToHomeVc"
+    static let fromLogToHomeVc = "moveFromLogToTabVc"
+    static let fromSignUpToHomeVc = "moveFromSignVcToHomeVc"
+    static let tabBarVC = "tabbarvc"
 }
 
 class DictKeyConstants {

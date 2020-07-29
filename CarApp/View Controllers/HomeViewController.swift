@@ -17,11 +17,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var qrCodeImage: UIImageView!
     private let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tabBarController?.navigationItem.hidesBackButton = true
+        
         UsefulMethods.makeBtnRound(button: emergencyBtn)
         UsefulMethods.makeBtnRound(button: scanBarcodeBtn)
+         UsefulMethods.makeRedBorderToBtn(button: scanBarcodeBtn)
         
         let userUID = FirebaseFunctions.getCurrentUserUId()
         if userUID != "" {
@@ -40,6 +44,7 @@ class HomeViewController: UIViewController {
         
         var firstName: String = ""
         var lastName: String = ""
+        
         FirebaseFunctions.getUserInfo(userUID: userUID, callBack: { (userDict) in
             guard let userDict = userDict else {
                 print("current logged user dict is empty")
@@ -67,17 +72,7 @@ class HomeViewController: UIViewController {
         
         return nil
     }
-    
-    
-    @IBAction func scanbarcodeClicked(_ sender: Any) {
-        //        let scanViewController = self.storyboard?.instantiateViewController(identifier: Constants.scanViewController) as? ScannerViewController
-        //
-        //                       self.navigationController?.pushViewController(scanViewController!, animated: false)
-        //                       self.dismiss(animated: false, completion: nil)
-        ////        performSegue(withIdentifier: "scanCode", sender: self)
-    }
-    
-    
+
     func transitionToLogInRegisterScreen() {
         let viewController = storyboard?.instantiateViewController(identifier: Constants.loginRegisterViewController) as? ViewController
         

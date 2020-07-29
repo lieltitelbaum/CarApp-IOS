@@ -29,7 +29,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         isPermission = findLocation()
         startLocationManager()
         
@@ -213,7 +213,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     @IBAction func demoPressed(_ sender: Any) {
         //create accident with user id- PnIIpfQEzmWvWtyobeDIMoApKa13 , name: liel titel
-        //        createAccident(userID: "PnIIpfQEzmWvWtyobeDIMoApKa13")
         getCurrentLocation(userID: Constants.userIdForDemoBtnScannerVC)
     }
     

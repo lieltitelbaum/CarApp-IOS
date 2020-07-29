@@ -26,6 +26,8 @@ class AccidentInfoViewController: UIViewController {
     private var accidentUser2Key: String = ""
     var isUserAddingImage: Bool = false
     var imagesUrlList: [String] = []
+    private var imagesAmount = 0
+    
     override func viewWillAppear(_ animated: Bool) {
         setUpCollectionView()
         loadAccidentDetails()
@@ -36,7 +38,10 @@ class AccidentInfoViewController: UIViewController {
         imagesCollection.allowsMultipleSelection = false
         UsefulMethods.makeBtnRound(button: addImageBtn)
         UsefulMethods.makeBtnRound(button: otherDriverDetailsBtn)
+        UsefulMethods.makeRedBorderToBtn(button: addImageBtn)
+        
         print("Accident key: \(accidentKey)")
+        
         setUpCollectionViewItemSize()
     }
     
@@ -47,6 +52,7 @@ class AccidentInfoViewController: UIViewController {
     
     private func setUpCollectionViewItemSize() {
         print("starting to set up collection view item size..")
+        
         if(collectionViewFlowLayout == nil) {
             let numberOfItemsPerRow: CGFloat = 3
             let lineSpacing:CGFloat = 5
@@ -94,22 +100,38 @@ class AccidentInfoViewController: UIViewController {
     }
     
     private func loadImages(imagesKey: String) {
-        imagesUrlList.removeAll()
+        
         FirebaseFunctions.getImagesForAccidentFirebase(imagesKey: imagesKey) { (imagesDict) in
             guard let imagesDict = imagesDict else {
                 print("Images dict is empty")
                 return
             }
-            print("Adding images...")
-            for key in imagesDict.keys {
-                if(key != "url") {
-                    self.imagesUrlList.append(imagesDict[key] as! String)
-                    self.imagesCollection.reloadData()
-                    print(self.imagesUrlList.count)
-                }
+            //if there are new images- > remove all url in the list, load url list and reload the data
+            if(imagesDict.keys.count > self.imagesAmount && self.imagesUrlList.isEmpty == false) {
+                self.imagesUrlList.removeAll()
+                print("removing all")
+                self.addUrlToList(imagesDict: imagesDict)
+                self.imagesCollection.reloadData()
             }
+            else if(self.imagesUrlList.isEmpty){
+                self.addUrlToList(imagesDict: imagesDict)
+                self.imagesCollection.reloadData()
+            }
+            
+        }
+        self.imagesAmount = self.imagesUrlList.count
+       
+    }
+
+    private func addUrlToList(imagesDict: Dictionary< String, Any>){
+    for key in imagesDict.keys {
+        if(key != "url") {
+            imagesUrlList.append(imagesDict[key] as! String)
+            imagesUrlList.sort(by: {$0 > $1})
+            print(imagesUrlList.count)
         }
     }
+}
     
     private func checkPermission() {
         //check camera and library permission
@@ -143,8 +165,6 @@ class AccidentInfoViewController: UIViewController {
     @IBAction func addImagePressed(_ sender: Any) {
         checkPermission()
         isUserAddingImage = true
-        
-//        imagesCollection.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -169,14 +189,10 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.imageCollectionViewCellID, for: indexPath) as! ImageCollectionViewCell
-        cell.contentView.layer.cornerRadius = 10
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.backgroundColor = UIColor.gray.cgColor
-        cell.backgroundColor = UIColor.white
-        cell.layer.shadowColor = UIColor.darkGray.cgColor
         
         let url = URL(string: imagesUrlList[indexPath.row])
         print("url in collection view\(String(describing: url))")
+        
         UsefulMethods.showImageFromUrl(imageUrl: imagesUrlList[indexPath.row], profileImage: cell.imageView)
         return cell
     }
@@ -189,7 +205,7 @@ extension AccidentInfoViewController: UICollectionViewDelegate, UICollectionView
         self.imageUpload = UIImage(data: data!)
         isUserAddingImage = false
         
-        performSegue(withIdentifier: Constants.accidentInfoToImageDetVc, sender: item)
+        performSegue(withIdentifier: Constants.accidentInfoToAddImageVc, sender: item)
         
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {

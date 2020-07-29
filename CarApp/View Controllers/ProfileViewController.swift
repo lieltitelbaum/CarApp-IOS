@@ -39,7 +39,6 @@ class ProfileViewController: UIViewController {
     private var imageUpload: UIImage? = nil
     private var countPresses = 0
     private var dataBeforeChange = ""
-    private let db = Firestore.firestore()
     var userUID: String = ""
     
     override func viewDidLoad() {
@@ -48,10 +47,9 @@ class ProfileViewController: UIViewController {
         retriveUserProfileFromFirebase()
         
         hideSaveImageBtn()
-        //        roundedBorderBtn()
         disableTextFields()
         setImage()
-        makeProfilePictureRound(image: profileImage)
+        UsefulMethods.makePictureRound(image: profileImage)
     }
     
     func roundedBorderBtn () {
@@ -103,12 +101,14 @@ class ProfileViewController: UIViewController {
     }
     
     func setImage() {
+        //set gesture when image is being tapped
         profileImage.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentPicker))
         profileImage.addGestureRecognizer(tapGesture)
     }
     
     @objc func presentPicker(){
+        //when profile image is clicked->
         checkPermission()
     }
     
@@ -117,19 +117,15 @@ class ProfileViewController: UIViewController {
     }
     
     func retriveUserProfileFromFirebase() {
-        //check if there is a current user connected and if so, return its uuid
-        if Auth.auth().currentUser != nil {
-            userUID = Auth.auth().currentUser!.uid
-            let firebasePath = db.collection(Constants.fireStoreDbUsers).document(userUID)
-            firebasePath.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    self.setTextFieldsTextByFirebaseValues(doc: document)
-                    self.loadProfileImage(doc: document)
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    print("Document data: \(dataDescription)")
-                } else {
-                    print("Document does not exist")
+        //if user is logged in, retrive user info from firestore by userUID, and set fields by its' data
+        if FirebaseFunctions.isUserLoggedIn() {
+            FirebaseFunctions.getUserInfo(userUID: FirebaseFunctions.getCurrentUserUId()) { (userDict) in
+                guard let userDict = userDict else {
+                    print("user dict didn't load..")
+                    return
                 }
+                self.setTextFieldsTextByFirebaseValues(dic: userDict)
+                self.loadProfileImage(dic: userDict)
             }
         }
     }
@@ -157,31 +153,33 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func loadProfileImage(doc: DocumentSnapshot) {
-        let imageUrl = doc.get(DictKeyConstants.profileProfileImage) as? String ?? ""
+    func loadProfileImage(dic: Dictionary<String, Any>) {
+        let imageUrl = dic[DictKeyConstants.profileProfileImage] as? String ?? ""
         UsefulMethods.showImageFromUrl(imageUrl: imageUrl, profileImage: profileImage)
     }
     
-    func setTextFieldsTextByFirebaseValues(doc: DocumentSnapshot) {
-        firstNameTextField.text = doc.get(DictKeyConstants.profileFirstName) as? String
-        lastNameTextField.text = doc.get(DictKeyConstants.profileLastName) as? String
-        emailTextField.text = doc.get(DictKeyConstants.profileEmail) as? String
-        phoneNumberTextField.text = doc.get(DictKeyConstants.profilePhoneNumber) as? String
-        govermentIDTextField.text = doc.get(DictKeyConstants.profileUserID) as? String
-        carNumberTextField.text = doc.get(DictKeyConstants.profileCarNumber) as? String
-        carModelTextField.text = doc.get(DictKeyConstants.profileCarModel) as? String
-        carColorTextField.text = doc.get(DictKeyConstants.profileCarColor) as? String
-        driverNameTextField.text = doc.get(DictKeyConstants.profileDriverName) as? String
-        addressTextField.text = doc.get(DictKeyConstants.profileAddress) as? String
-        licenceNumberTextField.text = doc.get(DictKeyConstants.profileLicenceNumber) as? String
-        ownerAddressTextField.text = doc.get(DictKeyConstants.profileoOwnerAddress) as? String
-        insuranceCompanyNameTextField.text = doc.get(DictKeyConstants.profileInsuranceCompanyName) as? String
-        insurancePolicyNumberTextField.text = doc.get(DictKeyConstants.profileInsurancePolicyNumber) as? String
-        insuranceAgentNameTextField.text = doc.get(DictKeyConstants.profileInsuranceAgentName) as? String
-        insuranceAgentPhoneTextField.text = doc.get(DictKeyConstants.profileInsuranceAgentPhoneNum) as? String
+    func setTextFieldsTextByFirebaseValues(dic: Dictionary<String, Any>) {
+        //set text fields by dictionary user data
+        firstNameTextField.text = dic[DictKeyConstants.profileFirstName] as? String
+        lastNameTextField.text = dic[DictKeyConstants.profileLastName] as? String
+        emailTextField.text = dic[DictKeyConstants.profileEmail] as? String
+        phoneNumberTextField.text = dic[DictKeyConstants.profilePhoneNumber] as? String
+        govermentIDTextField.text = dic[DictKeyConstants.profileUserID] as? String
+        carNumberTextField.text = dic[DictKeyConstants.profileCarNumber] as? String
+        carModelTextField.text = dic[DictKeyConstants.profileCarModel] as? String
+        carColorTextField.text = dic[DictKeyConstants.profileCarColor] as? String
+        driverNameTextField.text = dic[DictKeyConstants.profileDriverName] as? String
+        addressTextField.text = dic[DictKeyConstants.profileAddress] as? String
+        licenceNumberTextField.text = dic[DictKeyConstants.profileLicenceNumber] as? String
+        ownerAddressTextField.text = dic[DictKeyConstants.profileoOwnerAddress] as? String
+        insuranceCompanyNameTextField.text = dic[DictKeyConstants.profileInsuranceCompanyName] as? String
+        insurancePolicyNumberTextField.text = dic[DictKeyConstants.profileInsurancePolicyNumber] as? String
+        insuranceAgentNameTextField.text = dic[DictKeyConstants.profileInsuranceAgentName] as? String
+        insuranceAgentPhoneTextField.text = dic[DictKeyConstants.profileInsuranceAgentPhoneNum] as? String
     }
     
     func updateProfileImage() {
+        //update user profile image to the selected image
         guard let imageSelected = self.imageUpload else {
             print("Image is nil")
             return
@@ -190,7 +188,7 @@ class ProfileViewController: UIViewController {
         guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
             return
         }
-        
+        //upload image to fireStorage and upload its' url to firestore as profileImage Url (String)
         FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.profileImageFireStorageRef, imageName: userUID, imageData: imageData) { (profileUrl) in
             print("profile photo url:")
             print(profileUrl)
@@ -202,13 +200,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func logOutBtnTapped(_ sender: Any) {
         FirebaseFunctions.logOut()
-        let viewController = storyboard?.instantiateViewController(identifier: Constants.loginRegisterViewController) as? ViewController
         
         self.navigationController?.popToRootViewController(animated: true)
-        //        self.navigationController?.pushViewController(viewController!, animated: false)
-        //        self.navigationController?.isToolbarHidden = false
-        view.window?.rootViewController = viewController
-        view.window?.makeKeyAndVisible()
     }
     
     func editFieldData(sender: UIButton, textField: UITextField) -> String {
@@ -348,6 +341,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //set imageUpload to selected image and set it into profileImage
         if let editedImage = info[.editedImage] as? UIImage {
             imageUpload = editedImage
             profileImage.image = editedImage

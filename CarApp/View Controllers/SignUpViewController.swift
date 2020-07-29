@@ -34,6 +34,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         delgateAllTextFields()
         
         UsefulMethods.makeBtnRound(button: signUpBtn)
+        UsefulMethods.makeRedBorderToBtn(button: signUpBtn)
     }
     
     func hideLabels() {
@@ -132,7 +133,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                             print("Error saving user to firestore with first name: \(firstName) and last name \(lastName)")
                         }
                     }
-                    self.transitionToHomeScreen()
+                    self.performSegue(withIdentifier: Constants.fromSignUpToHomeVc, sender: self)
                 }
             }
         }
@@ -143,14 +144,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         //When pressed on the return button in the keyboard, the keyboard is dismmised
         textField.resignFirstResponder()
         return true
-    }
-    
-    func transitionToHomeScreen() {
-        let tabBarViewController = self.storyboard?.instantiateViewController(identifier: "tabbarvc") as? UITabBarController
-        
-        self.dismiss(animated: false, completion: nil)
-        self.view.window?.rootViewController = tabBarViewController
-        self.view.window?.makeKeyAndVisible()
     }
     
     func showError(message: String) {

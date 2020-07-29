@@ -23,6 +23,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTxt.delegate = self
         
         UsefulMethods.makeBtnRound(button: logInBtn)
+        UsefulMethods.makeRedBorderToBtn(button: logInBtn)
         errorLbl.alpha = 0//label is not shown
     }
     
@@ -48,11 +49,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 self.errorLbl.alpha = 1 //showing the error
             }
             else {
-                let tabBarViewController = self.storyboard?.instantiateViewController(identifier: "tabbarvc") as? UITabBarController//TODO:: const
-                
-                self.dismiss(animated: false, completion: nil)
-                self.view.window?.rootViewController = tabBarViewController
-                self.view.window?.makeKeyAndVisible()
+                self.performSegue(withIdentifier: Constants.fromLogToHomeVc, sender: self)
             }
         }
     }

@@ -16,17 +16,15 @@ import AVFoundation
 
 class FirebaseFunctions {
     
-    static let db = Firestore.firestore()
+    private static let db = Firestore.firestore()
     typealias CompletionAccidentList = (_ accidents : [Accident]?) -> Void
     typealias dict = Dictionary<String, Any>?
-    typealias CompletionProfileDict = (_ profileDict : Dictionary<String, Any> ) -> Void
-    typealias CompletionDictAccident = (_ accidentDict: Dictionary<String, Any>) -> Void
     
-    static func isUserLoggedIn() -> Bool {
+    public static func isUserLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
     }
     
-    static func logOut() {
+    public static func logOut() {
         do {
             try Auth.auth().signOut()
         } catch {
@@ -34,7 +32,7 @@ class FirebaseFunctions {
         }
     }
     
-    static func getCurrentUserUId() ->String {
+    public static func getCurrentUserUId() ->String {
         if isUserLoggedIn() {
             return Auth.auth().currentUser?.uid ?? ""
         }
@@ -43,7 +41,7 @@ class FirebaseFunctions {
         }
     }
     
-    static func createEmptyAccidentsImagesInFirestore (accidentKey: String) {
+    public static func createEmptyAccidentsImagesInFirestore (accidentKey: String) {
         //create new images for this accidentKey, this function create the path and insert defult vaules at the first time the accident is created, until it will be edited.
         let images = [DictKeyConstants.accidentImagesUrl : "emptyURl"]//defult values until users will insert images from the accident
         
@@ -55,7 +53,7 @@ class FirebaseFunctions {
         }
     }
     
-    static func createAccidentInFirestore(accident: Accident){
+    public static func createAccidentInFirestore(accident: Accident){
         db.collection(Constants.fireStoreDbAccident).document(accident.accidentKey).setData(accident.convertToDict()) { (error) in
             if error != nil {
                 //print error
@@ -65,28 +63,27 @@ class FirebaseFunctions {
         createEmptyAccidentsImagesInFirestore(accidentKey: accident.accidentKey)
     }
     
-    static func getAccidentFromFirebaseByKey(accidentKey: String, callback: @escaping (_ dict: Dictionary< String, Any>) -> ()) {
-//        return dict
-         var dataDict :Dictionary<String, Any> = [:]
-//          let accidentRef = db.collection(Constants.fireStoreDbAccident)
+    public static func getAccidentFromFirebaseByKey(accidentKey: String, callback: @escaping (_ dict: Dictionary< String, Any>) -> ()) {
+        //        return dict
+        var dataDict :Dictionary<String, Any> = [:]
+        //          let accidentRef = db.collection(Constants.fireStoreDbAccident)
         let firebasePath = db.collection(Constants.fireStoreDbAccident).document(accidentKey)
-                      firebasePath.getDocument { (document, error) in
-                          if let document = document, document.exists {
-                            dataDict = document.data()!
-                            print("accident dic info \(dataDict)")
-//                              print("Document data: \(dataDict)")
-                            callback(dataDict)
-                          } else {
-                              print("Document does not exist")
-                          callback(dataDict)
-                          }
-                      }
+        firebasePath.getDocument { (document, error) in
+            if let document = document, document.exists {
+                dataDict = document.data()!
+                print("accident dic info \(dataDict)")
+                //                              print("Document data: \(dataDict)")
+                callback(dataDict)
+            } else {
+                print("Document does not exist")
+                callback(dataDict)
+            }
+        }
     }
     
-    static func getAllAccidentsFromFirebase(callBack: @escaping CompletionAccidentList) {
+    public static func getAllAccidentsFromFirebase(callBack: @escaping CompletionAccidentList) {
         //get accidents for current usre loged in
-        
-         var accidentsList = [Accident] ()
+        var accidentsList = [Accident] ()
         db.collection(Constants.fireStoreDbAccident).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -100,11 +97,12 @@ class FirebaseFunctions {
                 }
                 callBack(accidentsList)
             }
-         callBack(nil)
+            callBack(nil)
         }
     }
     
-    static func getImagesForAccidentFirebase(imagesKey: String, callBack: @escaping (_ dict: dict) -> ()) {
+    public static func getImagesForAccidentFirebase(imagesKey: String, callBack: @escaping (_ dict: dict) -> ()) {
+        //get all images for imageskey
         let imagesRef = db.collection(Constants.fireStoreDbImagesAccident).document(imagesKey)
         var dataDict :Dictionary<String, Any> = [:]
         
@@ -121,8 +119,8 @@ class FirebaseFunctions {
             }
         }
     }
-    //
-    static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data, callBack: @escaping (_ url : String) -> ()){
+    
+    public static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data, callBack: @escaping (_ url : String) -> ()){
         //upload imagr to fireStorage and returns its' url
         var urlReturn :String = ""
         let storageRef = Storage.storage().reference(forURL: Constants.firebaseStorageRefUrl)
@@ -144,10 +142,11 @@ class FirebaseFunctions {
             }
         }
         print("url in firebase func: \(urlReturn)")
-       
+        
     }
     
-    static func updateValueInProfile(key: String, val: Any, userUID: String) {
+    public static func updateValueInProfile(key: String, val: Any, userUID: String) {
+        //update user profile by userUId, -> [key] = val
         let userRef = db.collection(Constants.fireStoreDbUsers)
         
         userRef.document(userUID).updateData([key : val]) { (err) in
@@ -158,7 +157,7 @@ class FirebaseFunctions {
         }
     }
     
-    static func addImageToAccidentsFirestore(imagesAccidentKey: String, imageUrl: String){
+    public static func addImageToAccidentsFirestore(imagesAccidentKey: String, imageUrl: String, callBack: @escaping (_ didFinsihUpload: Bool) -> ()){
         //add new image to accident images by its' url and accident images key
         let accidentImages = db.collection(Constants.fireStoreDbImagesAccident)
         
@@ -167,22 +166,24 @@ class FirebaseFunctions {
             if error != nil {
                 //print error
                 print("Error creating new accident image path in firestore")
+                callBack(false)
             }
-            
+            callBack(true)
         }
     }
     
-    static func getUserInfo(userUID: String, callBack: @escaping (_ dict: dict) -> ()) {
+   public static func getUserInfo(userUID: String, callBack: @escaping (_ dict: dict) -> ()) {
+    //get user profile by his\her userUID and return its' dictionary in a call back when completed
         let usersRef = db.collection(Constants.fireStoreDbUsers).document(userUID)
         var dataDict :Dictionary<String, Any> = [:]
         
         usersRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-
+                
                 dataDict = document.data()!
                 callBack(dataDict)
-
+                
                 print("Data dict:: \(dataDict)")
                 print("Document data: \(dataDescription)")
             } else {

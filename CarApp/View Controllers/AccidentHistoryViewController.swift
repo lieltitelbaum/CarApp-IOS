@@ -26,7 +26,6 @@ class AccidentHistoryViewController: UIViewController {
         accidentsTableView.delegate = self
         
         getData()
-        accidentsTableView.reloadData()
     }
     
     private func getData() {
@@ -37,7 +36,11 @@ class AccidentHistoryViewController: UIViewController {
                     print("accident key in list: \(accident.accidentKey)")
                     self.accidentsList.append(accident)
                 }
-                self.accidentsTableView.reloadData()
+                //sort by accident dates
+                self.accidentsList.sort(by:  {$0.accidentDate > $1.accidentDate})
+                DispatchQueue.main.async {
+                    self.accidentsTableView.reloadData()
+                }
             }
         }
         for accident in accidentsList {
@@ -61,21 +64,18 @@ extension AccidentHistoryViewController : UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = self.accidentsTableView.dequeueReusableCell(withIdentifier: Constants.accidentRowIdHistoryVC, for: indexPath) as? AccidentHistoryTableViewCell
         
-//        let backgroundView = UIView()
-//        backgroundView.backgroundColor = UIColor.red
-//        cell!.selectedBackgroundView = backgroundView
-        
+        //Add accident data to cell data
         cell?.dateLabel.text = self.accidentsList[indexPath.row].accidentDate
         accidentKey = self.accidentsList[indexPath.row].accidentKey
         let accidentLat = self.accidentsList[indexPath.row].accidentLocationLat
         let accidentLong = self.accidentsList[indexPath.row].accidentLocationLong
-
+        
         UsefulMethods.getAddressAsStringFromCord(long: accidentLong, lat: accidentLat) { (locationStr) in
             cell?.locationLabel.text = locationStr
         }
         
         if (cell == nil){
-            cell = AccidentHistoryTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "AccidentRow")
+            cell = AccidentHistoryTableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: Constants.accidentRowIdHistoryVC)
         }
         
         return cell!
@@ -84,12 +84,6 @@ extension AccidentHistoryViewController : UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         accidentKey = accidentsList[indexPath.row].accidentKey
         performSegue(withIdentifier: Constants.moveToAccidentInfoVc, sender: self)
-        
-        func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-            var cellToDeSelect:UITableViewCell = tableView.cellForRow(at: indexPath as IndexPath)!
-            cellToDeSelect.contentView.backgroundColor = UIColor.clear
-            
-        }
     }
 }
 

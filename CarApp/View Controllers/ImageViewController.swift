@@ -12,15 +12,20 @@ class ImageViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var saveBtn: UIButton!
+    
     var imageUpload: UIImage? = nil
     var accidentKey: String!
     var didUserAddImage: Bool! //if the user wants to add image or to show image in fuller screen
+    var didImageDoneUploading: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UsefulMethods.makeRedBorderToBtn(button: saveBtn)
+        UsefulMethods.makeBtnRound(button: saveBtn)
         setupImageView()
         setUpSaveBtn()
+        
         print("Image vc: \n imageview \(String(describing: imageUpload ?? nil))")
         print("accident key: \(accidentKey ?? "")")
     }
@@ -43,7 +48,9 @@ class ImageViewController: UIViewController {
     
     @IBAction func saveImagePressed(_ sender: Any) {
         //if user pressed add image in the previous screen -> add the new image to firebase storage and after that add it to firestore by compatible accident id
-//        if(didUserAddImage) {
+        self.saveBtn.isEnabled = false //user can not press on save image while other image is being uploaded
+        
+        if(didImageDoneUploading) {
             guard let imageSelected = self.imageUpload else {
                 print("Image is nil")
                 return
@@ -54,12 +61,17 @@ class ImageViewController: UIViewController {
                 return
             }
             //add image to firestorage and get its' url
-        
-        FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.accidentImagesFireStorageRef, imageName: UUID().uuidString, imageData: imageData) { (urlString) in
-            print("\nimageUrl\(urlString)")
-            //upload image to firestore
-            FirebaseFunctions.addImageToAccidentsFirestore(imagesAccidentKey: self.accidentKey, imageUrl: urlString)
-            self.navigationController?.popViewController(animated: true)
+            FirebaseFunctions.uploadImageToFirestorage(childNameInStoragePath: Constants.accidentImagesFireStorageRef, imageName: UUID().uuidString, imageData: imageData) { (urlString) in
+                print("\nimageUrl\(urlString)")
+                //upload image to firestore
+                
+                FirebaseFunctions.addImageToAccidentsFirestore(imagesAccidentKey: self.accidentKey, imageUrl: urlString) {
+                    (result) in
+                    self.didImageDoneUploading = result
+                    print("did image done uploading \(result)")
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

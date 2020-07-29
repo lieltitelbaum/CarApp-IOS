@@ -31,6 +31,7 @@ class UsefulMethods {
     }
     
     public static func showImageFromUrl (imageUrl: String, profileImage: UIImageView) {
+        //present the image from imageUrl in UIImageView
         print("starting to show image...")
         if(imageUrl == ""){
             print("url is empty")
@@ -49,7 +50,7 @@ class UsefulMethods {
     }
     
     public static func getAddressAsStringFromCord(long: Double, lat: Double, callBack: @escaping (_ location: String) -> ()) {
-        //get longidute and latitude and return the location address
+        //get longitude and latitude and return the location address
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(CLLocation(latitude: lat, longitude: long)) { (placemarks, error) in
             if let error = error {
@@ -67,10 +68,19 @@ class UsefulMethods {
             let cityName = placemark.locality ?? ""
             print("city name \(cityName)")
             
-            //                         DispatchQueue.main.async {
-            callBack("\(streetName) \(streetNubmer) ,\(cityName)")
-            //            }
+            DispatchQueue.main.async {
+                callBack("\(streetName) \(streetNubmer) ,\(cityName)")
+            }
         }
         callBack("")
+    }
+    
+    
+    public static func transitionToHomeScreen(vc: UIViewController) {
+        let tabBarViewController = vc.storyboard?.instantiateViewController(identifier: Constants.tabBarVC) as? UITabBarController
+        
+        vc.dismiss(animated: false, completion: nil)
+        vc.view.window?.rootViewController = tabBarViewController
+        vc.view.window?.makeKeyAndVisible()
     }
 }
