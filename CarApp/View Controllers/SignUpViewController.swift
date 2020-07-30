@@ -119,7 +119,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 if err != nil {
                     //There was an error creating the user
                     print(err!.localizedDescription)
-                    self.showError(message: "Error creating user")
+                    self.showError(message:err!.localizedDescription)
                 }
                 else {
                     //User was created successfully, now store other fields in database

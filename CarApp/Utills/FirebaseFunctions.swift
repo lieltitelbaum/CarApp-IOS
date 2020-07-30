@@ -41,6 +41,8 @@ class FirebaseFunctions {
         }
     }
     
+    //Accident related methods
+    
     public static func createEmptyAccidentsImagesInFirestore (accidentKey: String) {
         //create new images for this accidentKey, this function create the path and insert defult vaules at the first time the accident is created, until it will be edited.
         let images = [DictKeyConstants.accidentImagesUrl : "emptyURl"]//defult values until users will insert images from the accident
@@ -120,6 +122,22 @@ class FirebaseFunctions {
         }
     }
     
+    public static func addImageToAccidentsFirestore(imagesAccidentKey: String, imageUrl: String, callBack: @escaping (_ didFinsihUpload: Bool) -> ()){
+           //add new image to accident images by its' url and accident images key
+           let accidentImages = db.collection(Constants.fireStoreDbImagesAccident)
+           
+           //set key and value to be image url
+           accidentImages.document(imagesAccidentKey).setData([UUID().uuidString : imageUrl], merge: true) { (error) in
+               if error != nil {
+                   //print error
+                   print("Error creating new accident image path in firestore")
+                   callBack(false)
+               }
+               callBack(true)
+           }
+       }
+    
+    //FireStorage method related
     public static func uploadImageToFirestorage( childNameInStoragePath: String, imageName: String, imageData: Data, callBack: @escaping (_ url : String) -> ()){
         //upload imagr to fireStorage and returns its' url
         var urlReturn :String = ""
@@ -145,6 +163,7 @@ class FirebaseFunctions {
         
     }
     
+    //User realted methods
     public static func updateValueInProfile(key: String, val: Any, userUID: String) {
         //update user profile by userUId, -> [key] = val
         let userRef = db.collection(Constants.fireStoreDbUsers)
@@ -154,21 +173,6 @@ class FirebaseFunctions {
                 print(err.localizedDescription)
             }
             print("Successfully updated data")
-        }
-    }
-    
-    public static func addImageToAccidentsFirestore(imagesAccidentKey: String, imageUrl: String, callBack: @escaping (_ didFinsihUpload: Bool) -> ()){
-        //add new image to accident images by its' url and accident images key
-        let accidentImages = db.collection(Constants.fireStoreDbImagesAccident)
-        
-        //set key and value to be image url
-        accidentImages.document(imagesAccidentKey).setData([UUID().uuidString : imageUrl], merge: true) { (error) in
-            if error != nil {
-                //print error
-                print("Error creating new accident image path in firestore")
-                callBack(false)
-            }
-            callBack(true)
         }
     }
     

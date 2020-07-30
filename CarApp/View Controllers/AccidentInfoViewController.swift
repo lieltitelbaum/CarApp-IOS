@@ -30,7 +30,7 @@ class AccidentInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setUpCollectionView()
-        loadAccidentDetails()
+        loadImages(imagesKey: accidentKey)
     }
     
     override func viewDidLoad() {
@@ -44,6 +44,7 @@ class AccidentInfoViewController: UIViewController {
         print("Accident key: \(accidentKey)")
         
         setUpCollectionViewItemSize()
+        loadAccidentDetails()
     }
     
     private func setUpCollectionView() {
@@ -94,7 +95,7 @@ class AccidentInfoViewController: UIViewController {
                 UsefulMethods.getAddressAsStringFromCord(long: accident.accidentLocationLong, lat: accident.accidentLocationLat) { (locationStr) in
                     self.locationLbl.text = locationStr
                 }
-                self.loadImages(imagesKey: accident.accidentPhotosKey)
+//                self.loadImages(imagesKey: accident.accidentPhotosKey)
             }
         }
     }

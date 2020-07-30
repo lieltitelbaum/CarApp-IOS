@@ -23,7 +23,6 @@ class AccidentHistoryViewController: UIViewController {
         getData()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,14 +34,18 @@ class AccidentHistoryViewController: UIViewController {
         //get all accident regarding current logged user
         FirebaseFunctions.getAllAccidentsFromFirebase { (arr) in
             if arr != nil {
-                for accident in arr! {
-                    print("accident key in list: \(accident.accidentKey)")
-                    self.accidentsList.append(accident)
-                }
-                //sort by accident dates
-                self.accidentsList.sort(by:  {$0.accidentDate > $1.accidentDate})
-                DispatchQueue.main.async {
-                    self.accidentsTableView.reloadData()
+                if(arr!.count > self.accidentsList.count){
+                    //if there are new accidents or in the first time the accident list is empty and then load data
+                    self.accidentsList.removeAll() //In order to avoid duplicates
+                    for accident in arr! {
+                        print("accident key in list: \(accident.accidentKey)")
+                        self.accidentsList.append(accident)
+                    }
+                    //sort by accident dates
+                    self.accidentsList.sort(by:  {$0.accidentDate > $1.accidentDate})
+                    DispatchQueue.main.async {
+                        self.accidentsTableView.reloadData()
+                    }
                 }
             }
         }
