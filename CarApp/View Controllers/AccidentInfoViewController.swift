@@ -95,7 +95,6 @@ class AccidentInfoViewController: UIViewController {
                 UsefulMethods.getAddressAsStringFromCord(long: accident.accidentLocationLong, lat: accident.accidentLocationLat) { (locationStr) in
                     self.locationLbl.text = locationStr
                 }
-//                self.loadImages(imagesKey: accident.accidentPhotosKey)
             }
         }
     }
@@ -157,10 +156,14 @@ class AccidentInfoViewController: UIViewController {
                         }
                     }
                 }
+                else {
+                    UsefulMethods.cameraLibPermissionsDenied(vc: self)
+                }
             })
             
         }
         else if camera == .restricted || camera == .denied || photos == .denied || photos == .restricted{
+            UsefulMethods.cameraLibPermissionsDenied(vc: self)
             return
         }
     }

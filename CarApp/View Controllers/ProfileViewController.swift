@@ -153,11 +153,18 @@ class ProfileViewController: UIViewController {
                                 self.showImagePickerControllerChooseSource()
                             }
                         }
+                        else{
+                            print("not granted")
+                            UsefulMethods.cameraLibPermissionsDenied(vc: self)
+                        }
                     }
                 }
             })
         }
         else if camera == .restricted || camera == .denied || photos == .denied || photos == .restricted{
+            print("No permissions")
+            UsefulMethods.cameraLibPermissionsDenied(vc: self)
+            
             return
         }
     }

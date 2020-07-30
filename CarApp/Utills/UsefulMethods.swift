@@ -75,6 +75,13 @@ class UsefulMethods {
         callBack("")
     }
     
+    public static func cameraLibPermissionsDenied(vc: UIViewController) {
+        let alert = UIAlertController(title: "Opps! Camera and library access are dinied.", message: "Pleas go to Settings > CarApp to enable Camera and Photos access for this app.",preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        vc.present(alert, animated: true, completion: nil)
+    }
     
     public static func transitionToHomeScreen(vc: UIViewController) {
         let tabBarViewController = vc.storyboard?.instantiateViewController(identifier: Constants.tabBarVC) as? UITabBarController
