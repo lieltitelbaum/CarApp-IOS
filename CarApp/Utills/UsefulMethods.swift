@@ -76,7 +76,8 @@ class UsefulMethods {
     }
     
     public static func cameraLibPermissionsDenied(vc: UIViewController) {
-        let alert = UIAlertController(title: "Opps! Camera and library access are dinied.", message: "Pleas go to Settings > CarApp to enable Camera and Photos access for this app.",preferredStyle: .alert)
+        //Show alert when camera and photo library access are denied
+        let alert = UIAlertController(title: "Oops! Camera and library access are dinied.", message: "Pleas go to Settings > CarApp to enable Camera and Photos access for this app.",preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         
