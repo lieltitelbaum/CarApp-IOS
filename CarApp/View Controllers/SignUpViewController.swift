@@ -32,7 +32,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         hideLabels()
         delgateAllTextFields()
-        
         UsefulMethods.makeBtnRound(button: signUpBtn)
         UsefulMethods.makeRedBorderToBtn(button: signUpBtn)
     }

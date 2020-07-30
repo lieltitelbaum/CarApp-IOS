@@ -23,15 +23,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Car Accidents Reports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHb-P9-kG9">
-                                <rect key="frame" x="40" y="197.5" width="334" height="194.5"/>
+                                <rect key="frame" x="40" y="197.5" width="334" height="189.5"/>
                                 <fontDescription key="fontDescription" name="Galvji-Bold" family="Galvji" pointSize="25"/>
                                 <color key="textColor" red="0.99607843139999996" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="car_crush_in_white" translatesAutoresizingMaskIntoConstraints="NO" id="oQq-VZ-In9">
-                                <rect key="frame" x="40" y="442" width="334" height="150"/>
+                                <rect key="frame" x="40" y="437" width="334" height="155"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="W2m-GR-JI6"/>
+                                    <constraint firstAttribute="height" constant="155" id="W2m-GR-JI6"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="27x-nm-anv">
