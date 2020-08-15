@@ -1,9 +1,8 @@
 # CarApp-IOS
 
-Did you just get involved in a car accident ? This is the App for YOU!
-In CAR, you can exchange information with the other driver, see your accidents history, update your information such as insurance info and also call emergency services.
+CAR is a simple app that helps you handle stressful situations. With CAR, you can quickly call emergency services, get insurance details and take photos of the accident. CAR makes exchanging info with other drivers quick & easy, and you can even go back and check your history.
 
-#Created by Liel Titelbaum
+##Created by Liel Titelbaum
 
 <img src="https://github.com/lieltitelbaum/CarApp-IOS/blob/master/IMG_6073.PNG"
 width="288">
