@@ -6,12 +6,13 @@ CAR is a simple app that helps you handle stressful situations. With CAR, you ca
 Go to https://firebase.google.com/docs/ios/setup
 
 In Car, you will need the following Pods:
-
+```
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
+```
 
 #### Created by Liel Titelbaum
 
